@@ -9,6 +9,12 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    // A user can have many bus tickets (one-to-many relationship)
+    public function busTickets()
+    {
+        return $this->hasMany(BusTicket::class);
+    }
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
