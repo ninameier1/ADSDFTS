@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('festivals', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Primary key, auto-incremented
+            $table->string('name'); // Name of the festival
+            $table->string('location'); // Location where the festival is held
+            $table->date('date'); // Date of the festival
+            $table->text('description'); // A description of the festival
+            $table->string('genre')->nullable(); // Adding a genre column to filter festivals by music genre
+            $table->timestamps(); // Created_at and updated_at timestamps
         });
     }
 

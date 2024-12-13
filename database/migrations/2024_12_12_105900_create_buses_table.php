@@ -12,10 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('buses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->id(); // Primary key, auto-incremented
+            $table->string('bus_number')->unique(); // Unique bus number, identifies the bus
+            $table->integer('capacity')->default(35); // Capacity of the bus, default is 35 seats
+            $table->string('starting_point')->nullable(); // Nullable starting point (where the bus departs from)
+            $table->datetime('departure_time')->nullable(); // Nullable departure time
+            $table->datetime('arrival_time')->nullable(); // Nullable arrival time
+            $table->foreignId('festival_id')->nullable()->constrained()->onDelete('set null'); // Link to the festival the bus is associated with (nullable)
+            $table->timestamps(); // Created_at and updated_at timestamps
         });
     }
+
 
     /**
      * Reverse the migrations.
