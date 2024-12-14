@@ -3,63 +3,86 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bus;
+use App\Models\Festival;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Display a list of buses
     public function index()
     {
-        //
+        $buses = Bus::all(); // Fetch all buses from the database
+
+        // Return the 'buses.index' view with the buses data
+        return view('buses.index', compact('buses'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Show the form to create a new bus (manual creation by admin)
     public function create()
     {
-        //
+        // Fetch all festivals to allow the admin to choose one for the new bus
+        $festivals = Festival::all();  // Admin selects the festival the bus is associated with
+
+        // Return the 'buses.create' view, passing the festivals data to the view
+        return view('buses.create', compact('festivals'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Create a new bus (manual creation by admin)
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data to ensure proper input
+        $request->validate([
+            'bus_number' => 'required|string|unique:buses',  // Ensure the bus number is unique for the buses table
+            'capacity' => 'required|integer',  // Validate that the capacity is an integer
+            'festival_id' => 'required|exists:festivals,id',  // Ensure the festival_id exists in the festivals table
+        ]);
+
+        // Manually create in the database using mass assignment, passing only the necessary fields
+        Bus::create($request->only(['bus_number', 'capacity', 'festival_id']));
+
+        // Redirect the admin back to the bus index page with a success message
+        return redirect()->route('buses.index')->with('success', 'Bus created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    // Show a specific bus
     public function show(Bus $bus)
     {
-        //
+        return view('buses.show', compact('bus')); // Return the 'buses.show' view with the bus data
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Show the form for editing the specified bus
     public function edit(Bus $bus)
     {
-        //
+        // Fetch all festivals to allow the admin to re-select a festival if needed
+        $festivals = Festival::all();  // Admin may change the festival the bus is associated with
+
+        // Return the 'buses.edit' view, passing the bus and festivals data to the view
+        return view('buses.edit', compact('bus', 'festivals'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Update the bus after form submission
     public function update(Request $request, Bus $bus)
     {
-        //
+        // Validate the incoming request data to ensure proper input
+        $request->validate([
+            'bus_number' => 'required|string|unique:buses,bus_number,' . $bus->id,  // Ensure the bus number is unique, except for the current bus being updated
+            'capacity' => 'required|integer',  // Validate that the capacity is an integer
+        ]);
+
+        // Update the bus data using mass assignment with only the necessary fields
+        $bus->update($request->only(['bus_number', 'capacity']));
+
+        // Redirect the admin back to the bus index page with a success message
+        return redirect()->route('buses.index')->with('success', 'Bus updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Remove a bus (delete the bus from the database)
     public function destroy(Bus $bus)
     {
-        //
+        // Delete the bus from the database
+        $bus->delete();
+
+        // Redirect the admin back to the bus index page with a success message
+        return redirect()->route('buses.index')->with('success', 'Bus deleted successfully!');
     }
 }
