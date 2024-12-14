@@ -7,59 +7,81 @@ use Illuminate\Http\Request;
 
 class FestivalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Display a list of festivals with bus and ticket counts
     public function index()
     {
-        //
+        // Fetch all festivals along with counts of buses and tickets associated with each festival
+        $festivals = Festival::withCount(['buses', 'tickets'])->get();
+
+        // Return the 'festivals.index' view, passing the festivals data to the view
+        return view('festivals.index', compact('festivals'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Show the form to create a new festival (manual creation by admin)
     public function create()
     {
-        //
+        // Return the 'festivals.create' view where the admin can create a new festival
+        return view('festivals.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Store a new festival (manual creation by admin)
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data to ensure proper input
+        $request->validate([
+            'name' => 'required|string|unique:festivals',  // Festival name must be unique
+            'date' => 'required|date',  // Festival date must be a valid date
+            'location' => 'required|string',  // Festival location must be a string
+        ]);
+
+        // Create the festival in the database using mass assignment
+        Festival::create($request->only(['name', 'date', 'location']));
+
+        // Redirect the admin back to the festivals index page with a success message
+        return redirect()->route('festivals.index')->with('success', 'Festival created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Festival $festival)
+    // Show a specific festival with bus and ticket counts
+    public function show($id)
     {
-        //
+        // Fetch the specific festival with counts of buses and tickets associated with it
+        $festival = Festival::withCount('buses', 'tickets')->findOrFail($id);
+
+        // Return the 'festivals.show' view, passing the festival data to the view
+        return view('festivals.show', compact('festival'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Show the form for editing the specified festival
     public function edit(Festival $festival)
     {
-        //
+        // Return the 'festivals.edit' view where the admin can edit the festival details
+        return view('festivals.edit', compact('festival'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Update the festival after form submission
     public function update(Request $request, Festival $festival)
     {
-        //
+        // Validate the incoming request data to ensure proper input
+        $request->validate([
+            'name' => 'required|string|unique:festivals,name,' . $festival->id,  // Ensure the festival name is unique except for the current festival
+            'date' => 'required|date',  // Festival date must be a valid date
+            'location' => 'required|string',  // Festival location must be a string
+        ]);
+
+        // Update the festival in the database using mass assignment
+        $festival->update($request->only(['name', 'date', 'location']));
+
+        // Redirect the admin back to the festivals index page with a success message
+        return redirect()->route('festivals.index')->with('success', 'Festival updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Remove a festival (delete the festival from the database)
     public function destroy(Festival $festival)
     {
-        //
+        // Delete the festival from the database
+        $festival->delete();
+
+        // Redirect the admin back to the festivals index page with a success message
+        return redirect()->route('festivals.index')->with('success', 'Festival deleted successfully!');
     }
 }
