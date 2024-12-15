@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class BusTicket extends Model
 {
+    // FILL IT ALL UP
+    protected $fillable = [
+        'user_id',
+        'bus_id',
+        'festival_id',
+        'seat_number',
+    ];
+
     // A bus ticket belongs to a user (many-to-one relationship)
     public function user()
     {
@@ -18,6 +26,7 @@ class BusTicket extends Model
     {
         return $this->belongsTo(Bus::class)->nullable();
     }
+
     // A bus ticket belongs to a festival (many-to-one relationship)
     // Used to track how many bus tickets are sold for a specific festival
     public function festival()
