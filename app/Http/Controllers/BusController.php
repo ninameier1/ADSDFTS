@@ -8,12 +8,13 @@ use Illuminate\Http\Request;
 
 class BusController extends Controller
 {
-    // Display a list of buses
+    // Display a list of buses with ticket counts
     public function index()
     {
-        $buses = Bus::all(); // Fetch all buses from the database
+        // Fetch all buses along with the count of tickets associated with each bus
+        $buses = Bus::withCount('tickets')->get();
 
-        // Return the 'buses.index' view with the buses data
+        // Return the 'buses.index' view, passing the buses data to the view
         return view('buses.index', compact('buses'));
     }
 
@@ -32,13 +33,16 @@ class BusController extends Controller
     {
         // Validate the incoming request data to ensure proper input
         $request->validate([
-            'bus_number' => 'required|string|unique:buses',  // Ensure the bus number is unique for the buses table
-            'capacity' => 'required|integer',  // Validate that the capacity is an integer
-            'festival_id' => 'required|exists:festivals,id',  // Ensure the festival_id exists in the festivals table
+            'bus_number' => 'required|string|unique:buses',
+            'capacity' => 'required|integer',
+            'festival_id' => 'required|exists:festivals,id',
+            'starting_point' => 'nullable|string',
+            'departure_time' => 'nullable|date',
+            'arrival_time' => 'nullable|date',
         ]);
 
-        // Manually create in the database using mass assignment, passing only the necessary fields
-        Bus::create($request->only(['bus_number', 'capacity', 'festival_id']));
+        // Create the bus using all validated fields that match the $fillable array
+        Bus::create($request->only(array_keys($request->validated())));
 
         // Redirect the admin back to the bus index page with a success message
         return redirect()->route('buses.index')->with('success', 'Bus created successfully!');
@@ -65,12 +69,16 @@ class BusController extends Controller
     {
         // Validate the incoming request data to ensure proper input
         $request->validate([
-            'bus_number' => 'required|string|unique:buses,bus_number,' . $bus->id,  // Ensure the bus number is unique, except for the current bus being updated
-            'capacity' => 'required|integer',  // Validate that the capacity is an integer
+            'bus_number' => 'required|string|unique:buses,bus_number,' . $bus->id, // Ensure the bus number is unique, except for the current bus being updated
+            'capacity' => 'required|integer', // Validate that the capacity is an integer
+            'festival_id' => 'required|exists:festivals,id', // Ensure festival_id exists in the festivals table
+            'starting_point' => 'nullable|string', // Starting point is optional
+            'departure_time' => 'nullable|date', // Departure time is optional
+            'arrival_time' => 'nullable|date', // Arrival time is optional
         ]);
 
         // Update the bus data using mass assignment with only the necessary fields
-        $bus->update($request->only(['bus_number', 'capacity']));
+        $bus->update($request->only(['bus_number', 'capacity', 'starting_point', 'departure_time', 'arrival_time', 'festival_id']));
 
         // Redirect the admin back to the bus index page with a success message
         return redirect()->route('buses.index')->with('success', 'Bus updated successfully!');

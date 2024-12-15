@@ -6,6 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bus extends Model
 {
+    // Fill it all up at once
+    protected $fillable = [
+        'bus_number',
+        'capacity',
+        'starting_point',
+        'departure_time',
+        'arrival_time',
+        'festival_id',
+    ];
+
     // A bus can have many bus tickets (one-to-many relationship)
     // Up to 35 tickets can be sold for one bus
     public function busTickets()
@@ -20,5 +30,3 @@ class Bus extends Model
         return $this->belongsTo(Festival::class);
     }
 }
-
-
