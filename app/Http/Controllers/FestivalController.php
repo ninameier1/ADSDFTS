@@ -29,13 +29,15 @@ class FestivalController extends Controller
     {
         // Validate the incoming request data to ensure proper input
         $request->validate([
-            'name' => 'required|string|unique:festivals',  // Festival name must be unique
-            'date' => 'required|date',  // Festival date must be a valid date
-            'location' => 'required|string',  // Festival location must be a string
+            'name' => 'required|string|unique:festivals', // Festival name must be unique
+            'date' => 'required|date', // Festival date must be a valid date
+            'location' => 'required|string', // Festival location must be a string
+            'description' => 'required|string', // Description must be provided
+            'genre' => 'nullable|string', // Genre is optional
         ]);
 
         // Create the festival in the database using mass assignment
-        Festival::create($request->only(['name', 'date', 'location']));
+        Festival::create($request->only(['name', 'date', 'location', 'description', 'genre']));
 
         // Redirect the admin back to the festivals index page with a success message
         return redirect()->route('festivals.index')->with('success', 'Festival created successfully!');
@@ -63,13 +65,15 @@ class FestivalController extends Controller
     {
         // Validate the incoming request data to ensure proper input
         $request->validate([
-            'name' => 'required|string|unique:festivals,name,' . $festival->id,  // Ensure the festival name is unique except for the current festival
-            'date' => 'required|date',  // Festival date must be a valid date
-            'location' => 'required|string',  // Festival location must be a string
+            'name' => 'required|string|unique:festivals,name,' . $festival->id, // Ensure the festival name is unique except for the current festival
+            'date' => 'required|date', // Festival date must be a valid date
+            'location' => 'required|string', // Festival location must be a string
+            'description' => 'required|string', // Description must be provided
+            'genre' => 'nullable|string', // Genre is optional
         ]);
 
         // Update the festival in the database using mass assignment
-        $festival->update($request->only(['name', 'date', 'location']));
+        $festival->update($request->only(['name', 'date', 'location', 'description', 'genre']));
 
         // Redirect the admin back to the festivals index page with a success message
         return redirect()->route('festivals.index')->with('success', 'Festival updated successfully!');
