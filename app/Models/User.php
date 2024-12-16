@@ -15,6 +15,11 @@ class User extends Authenticatable
         return $this->hasMany(BusTicket::class);
     }
 
+    public function IsAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -27,6 +32,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'points'
     ];
 
     /**

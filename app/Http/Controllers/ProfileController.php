@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\BusTicket;
+use App\Models\User;
+
 class ProfileController extends Controller
 {
     /**
