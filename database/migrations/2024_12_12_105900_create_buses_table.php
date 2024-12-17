@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('buses', function (Blueprint $table) {
+        Schema::create('buses', function (Blueprint $table)
+        {
             $table->id(); // Primary key, auto-incremented
             $table->string('bus_number')->unique(); // Unique bus number, identifies the bus
+            $table->enum('status', ['reserve', 'scheduled'])->default('reserve'); // Enum for bus status, default is 'reserve'
             $table->integer('capacity')->default(35); // Capacity of the bus, default is 35 seats
             $table->string('starting_point')->nullable(); // Nullable starting point (where the bus departs from)
             $table->datetime('departure_time')->nullable(); // Nullable departure time

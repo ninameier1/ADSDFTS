@@ -20,10 +20,11 @@ class BusFactory extends Factory
     {
         return [
             'bus_number' => 'Bus-' . uniqid(), // Bus counter
+            'status' => 'scheduled', // Set the default status to 'scheduled'
             'capacity' => 35, // Duh
-            'starting_point' => fake()->optional()->city(), // Nullable starting point, optional
-            'departure_time' => fake()->optional()->dateTimeBetween('now', '+5 days'), // Nullable departure time, optional yay
-            'arrival_time' => fake()->optional()->dateTimeBetween('+5 days', '+10 days'), // Nullable arrival time, optional
+            'starting_point' => fake()->city(), // Nullable starting point, optional
+            'departure_time' => fake()->dateTimeBetween('now', '+5 days'), // Nullable departure time, optional yay
+            'arrival_time' => fake()->dateTimeBetween('+5 days', '+10 days'), // Nullable arrival time, optional
         ];
     }
 }
