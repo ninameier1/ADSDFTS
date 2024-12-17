@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Bus extends Model
 {
+    use HasFactory;
     // Fill it all up at once
     protected $fillable = [
         'bus_number',

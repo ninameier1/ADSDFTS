@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bustickets', function (Blueprint $table) {
-            $table->id(); // Primary key, auto-incremented
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Link to the users table (a ticket belongs to a user)
-            $table->foreignId('bus_id')->constrained()->onDelete('cascade'); // Link to the buses table (a ticket belongs to a bus)
-            $table->foreignId('festival_id')->constrained()->onDelete('cascade'); // Link to the festivals table (a ticket belongs to a festival)
-            $table->integer('seat_number'); // Seat number (from 1 to 35)
-            $table->timestamps(); // Created_at and updated_at timestamps
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('bus_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('festival_id')->nullable()->constrained()->onDelete('cascade');
+            $table->integer('seat_number');
+            $table->timestamps();
         });
     }
 

@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Festival extends Model
 {
+    use HasFactory;
     // Fill it all at once
     protected $fillable = [
         'name',

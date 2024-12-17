@@ -43,6 +43,14 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Check if the 'bustickets' table exists before attempting to drop the foreign key
+        if (Schema::hasTable('bustickets'))
+        {
+            Schema::table('bustickets', function (Blueprint $table) {
+                $table->dropForeign(['user_id']); // Adjust the foreign key column name if needed
+            });
+        }
+
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
