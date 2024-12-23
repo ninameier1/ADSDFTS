@@ -15,7 +15,7 @@ class User extends Authenticatable
         return $this->hasMany(BusTicket::class);
     }
 
-    public function IsAdmin()
+    public function isAdmin()
     {
         return $this->role === 'admin';
     }
