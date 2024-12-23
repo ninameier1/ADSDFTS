@@ -18,6 +18,11 @@ class Festival extends Model
         'genre',
     ];
 
+    // Something with carbon that otherwise gives error
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
     // A festival can have many buses (many-to-one relationship)
     public function buses()
     {

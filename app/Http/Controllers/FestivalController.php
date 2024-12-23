@@ -11,7 +11,7 @@ class FestivalController extends Controller
     public function index()
     {
         // Fetch all festivals along with counts of buses and tickets associated with each festival
-        $festivals = Festival::withCount(['buses', 'tickets'])->get();
+        $festivals = Festival::withCount(['buses', 'bustickets'])->get();
 
         // Return the 'festivals.index' view, passing the festivals data to the view
         return view('festivals.index', compact('festivals'));
@@ -47,17 +47,17 @@ class FestivalController extends Controller
     public function show($id)
     {
         // Fetch the specific festival with counts of buses and tickets associated with it
-        $festival = Festival::withCount('buses', 'tickets')->findOrFail($id);
+        $festival = Festival::withCount('buses', 'bustickets')->findOrFail($id);
 
-        // Return the 'festivals.show' view, passing the festival data to the view
-        return view('festivals.show', compact('festival'));
+        // Return the 'festivals.index' view, passing the festival data to the view
+        return view('festivals.index', compact('festival'));
     }
 
     // Show the form for editing the specified festival
     public function edit(Festival $festival)
     {
         // Return the 'festivals.edit' view where the admin can edit the festival details
-        return view('festivals.edit', compact('festival'));
+//        return view('festivals.edit', compact('festival'));
     }
 
     // Update the festival after form submission
