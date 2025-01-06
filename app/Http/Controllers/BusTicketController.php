@@ -19,7 +19,8 @@ class BusTicketController extends Controller
 
         // Fetch bustickets with eager loading, including the user (customer), bus, and festival relationships
         $bustickets = BusTicket::with(['bus', 'festival', 'user']) // Eager load user relationship
-        ->when($search, function ($query, $search) {
+        ->when($search, function ($query, $search)
+        {
             // Filter by customer name, bus number, or festival name
             return $query->whereHas('user', function ($query) use ($search) {
                 $query->where('name', 'like', "%{$search}%"); // Search by user name
@@ -40,21 +41,23 @@ class BusTicketController extends Controller
     // Show the form for booking a busticket (customer action)
     public function create()
     {
-        // Fetch all festivals with their associated buses
-        $festivals = Festival::with('buses')->get();
-        $users = User::all(); // Fetch all users
-        $buses = Bus::all();
+        // Fetch all festivals with their associated buses (only 'reserve' status buses)
+        $festivals = Festival::with(['buses' => function($query)
+        {
+            $query->where('status', 'reserve'); // Only fetch buses with 'reserve' status
+        }])->get();
 
-        // Return the 'bustickets.create' view, passing the festivals and buses data
-        return view('bustickets.create', compact('festivals', 'users', 'buses'));
+        // Fetch all users
+        $users = User::all();
+
+        // Return the 'bustickets.create' view, passing the festivals, users, and buses data
+        return view('bustickets.create', compact('festivals', 'users'));
     }
 
-    // Store a new busticket (customer action)
     public function store(Request $request)
     {
         // Validate the incoming request data
         $request->validate([
-            'user_id' => 'required|exists:users,id', // Ensure the user exists
             'festival_id' => 'required|exists:festivals,id', // Ensure the festival exists
         ]);
 
@@ -64,21 +67,28 @@ class BusTicketController extends Controller
         // Find the first available bus with 'reserve' status for the selected festival
         $bus = $festival->buses()->where('status', 'reserve')->first();
 
-        if (!$bus) // Error
+        if (!$bus) // Error if there is no bus
         {
             return redirect()->route('bustickets.index')->with('error', 'No buses available for this festival.');
         }
 
-        // Create a new bus ticket
+        // Find the highest seat number already booked for this bus
+        $maxSeatNumber = BusTicket::where('bus_id', $bus->id)->max('seat_number');
+
+        // Generate the next available seat number (increment by 1)
+        $seatNumber = $maxSeatNumber ? $maxSeatNumber + 1 : 1; // Start from 1 if no seat has been booked yet
+
+        // Create a new bus ticket with the generated seat number and the associated festival_id
         BusTicket::create([
-            'user_id' => $request->user_id, // Link to the customer
+            'user_id' => $request->user_id, // Automatically filled with the logged-in user's ID
             'bus_id' => $bus->id, // Link to the bus with 'reserve' status
+            'festival_id' => $festival->id, // Explicitly set the festival_id
+            'seat_number' => $seatNumber, // Automatically generated seat number
         ]);
 
         // Redirect back to the bus tickets list with a success message
         return redirect()->route('bustickets.index')->with('success', 'Ticket booked successfully!');
     }
-
 
     // Show details of a specific ticket
     public function show(BusTicket $busticket)

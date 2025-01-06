@@ -15,6 +15,8 @@
             <div class="input-group">
                 <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Search by customer name, bus number, or festival">
                 <button class="btn btn-primary" type="submit">Search</button>
+                <!-- Clear Search Button -->
+                <a href="{{ route('bustickets.index') }}" class="btn btn-secondary">Clear Search</a>
             </div>
         </form>
 
@@ -33,9 +35,9 @@
             <tbody>
             @foreach($bustickets as $busticket)
                 <tr>
-                    <td>{{ $busticket->user->name }}</td> <!-- Display the customer name -->
+                    <td>{{ $busticket->user->name }}</td>
                     <td>{{ $busticket->bus->bus_number }}</td>
-                    <td>{{ $busticket->festival->name }}</td>
+                    <td>{{ $busticket->festival ? $busticket->festival->name : 'No Festival' }}</td>
                     <td>{{ $busticket->seat_number ?? 'N/A' }}</td>
                     <td>
                         <!-- Show Button -->

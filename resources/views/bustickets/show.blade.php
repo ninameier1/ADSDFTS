@@ -11,7 +11,7 @@
             <div class="card-body">
                 <p><strong>Customer Name:</strong> {{ $busticket->user->name }}</p>
                 <p><strong>Bus Number:</strong> {{ $busticket->bus->bus_number }}</p>
-                <p><strong>Festival:</strong> {{ $busticket->festival->name }}</p>
+                <p><strong>Festival:</strong> {{ $busticket->festival ? $busticket->festival->name : 'No Festival' }}</p>
                 <p><strong>Seat Number:</strong> {{ $busticket->seat_number ?? 'N/A' }}</p>
                 <p><strong>Booking Date:</strong> {{ $busticket->created_at->format('Y-m-d H:i') }}</p>
             </div>
