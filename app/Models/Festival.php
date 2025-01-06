@@ -30,10 +30,15 @@ class Festival extends Model
     }
 
     // A festival can have many bus tickets (many-to-one relationship)
-    // Used to automatically schedule a bus if more than 35 tickets have been sold
     public function busTickets()
     {
         return $this->hasMany(BusTicket::class);
+    }
+
+    // Count the number of sold tickets for the festival
+    public function soldTicketsCount()
+    {
+        return $this->bustickets()->count(); // Used to count if more than 35 tickets have been sold
     }
 }
 

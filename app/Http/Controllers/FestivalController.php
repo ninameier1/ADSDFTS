@@ -63,7 +63,7 @@ class FestivalController extends Controller
         $festival = Festival::withCount('buses', 'bustickets')->findOrFail($id);
 
         // Return the 'festivals.index' view, passing the festival data to the view
-        return view('festivals.index', compact('festival'));
+        return view('festivals.show', compact('festival'));
     }
 
     // Show the form for editing the specified festival
