@@ -57,7 +57,7 @@ class FestivalController extends Controller
     public function edit(Festival $festival)
     {
         // Return the 'festivals.edit' view where the admin can edit the festival details
-//        return view('festivals.edit', compact('festival'));
+        return view('festivals.edit', compact('festival'));
     }
 
     // Update the festival after form submission

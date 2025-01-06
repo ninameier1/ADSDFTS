@@ -19,34 +19,27 @@
                 <th>Date</th>
                 <th>Location</th>
                 <th>Description</th>
+                <th>Genre</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             @foreach($festivals as $festival)
                 <tr>
-                    <form action="{{ route('festivals.update', $festival) }}" method="POST">
-                        @csrf
-                        @method('PUT')
-                        <td>
-                            <input type="text" name="name" value="{{ $festival->name }}" class="form-control" required>
-                        </td>
-                        <td>
-                            <input type="date" name="date" value="{{ $festival->date->format('Y-m-d') }}" class="form-control" required>
-                        </td>
-                        <td>
-                            <input type="text" name="location" value="{{ $festival->location }}" class="form-control" required>
-                        </td>
-                        <td>
-                            <input type="text" name="description" value="{{ $festival->description }}" class="form-control" required>
-                        </td>
-                        <td>
-                            <button type="submit" class="btn btn-success">Update</button>
-                        </td>
-                    </form>
+                    <td>{{ $festival->name }}</td>
+                    <td>{{ $festival->date->format('Y-m-d') }}</td>
+                    <td>{{ $festival->location }}</td>
+                    <td>{{ $festival->description }}</td>
+                    <td>{{ $festival->genre }}</td>
                     <td>
-                        <a href="{{ route('festivals.destroy', $festival) }}" class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $festival->id }}').submit();">Delete</a>
+                        <!-- Edit Button -->
+                        <a href="{{ route('festivals.edit', $festival) }}" class="btn btn-warning">Edit</a>
 
+                        <!-- Delete Button -->
+                        <a href="{{ route('festivals.destroy', $festival) }}" class="btn btn-danger"
+                           onclick="event.preventDefault(); document.getElementById('delete-form-{{ $festival->id }}').submit();">
+                            Delete
+                        </a>
                         <form id="delete-form-{{ $festival->id }}" action="{{ route('festivals.destroy', $festival) }}" method="POST" style="display: none;">
                             @csrf
                             @method('DELETE')
