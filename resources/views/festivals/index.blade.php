@@ -56,18 +56,21 @@
                         @endif
                     </a>
                 </th>
+                <th>Actions</th>
             </tr>
             </thead>
 
             <tbody>
             @foreach($festivals as $festival)
                 <tr>
-                    <td><a href="{{ route('festivals.show', $festival) }}">{{ $festival->name }}</a></td> <!-- Link to show page -->
+                    <td>{{ $festival->name }}</td> <!-- Link to show page -->
                     <td>{{ $festival->date->format('Y-m-d') }}</td>
                     <td>{{ $festival->location }}</td>
                     <td>{{ $festival->buses_count }}</td>
                     <td>{{ $festival->bustickets_count }}</td>
                     <td>
+                        <!-- Show Button -->
+                        <a href="{{ route('festivals.show', $festival) }}" class="btn btn-info">Show</a>
                     </td>
                 </tr>
             @endforeach
