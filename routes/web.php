@@ -7,12 +7,12 @@ use App\Http\Controllers\BusTicketController;
 use Illuminate\Support\Facades\Route;
 
 // Bus, Festival and BusTicket CRUD routes
-Route::middleware(['admin'])->group(function () // Keep it secret, keep it safe
-    {
+//Route::middleware(['admin'])->group(function () // Keep it secret, keep it safe
+//    {
         Route::resource('buses', BusController::class);
         Route::resource('festivals', FestivalController::class);
         Route::resource('bustickets', BusTicketController::class);
-    });
+//    });
 
 // Homepage
 Route::get('/', function ()

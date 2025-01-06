@@ -20,16 +20,20 @@ class Bus extends Model
     ];
 
     // A bus can have many bus tickets (one-to-many relationship)
-    // Up to 35 tickets can be sold for one bus
-    public function busTickets()
+    public function busTickets() // Up to 35 tickets can be sold for one bus
     {
         return $this->hasMany(BusTicket::class);
     }
 
     // A bus belongs to one festival (many-to-one relationship)
-    // This is also the destination
-    public function festival()
+    public function festival() // This is also the destination
     {
         return $this->belongsTo(Festival::class);
+    }
+
+    // Count the number of tickets sold
+    public function soldTicketsCount() // Used to count if more than 35 tickets have been sold
+    {
+        return $this->bustickets()->count();
     }
 }

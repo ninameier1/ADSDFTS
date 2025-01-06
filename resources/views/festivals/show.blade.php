@@ -42,6 +42,7 @@
             @method('DELETE')
             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this festival?')">Delete Festival</button>
         </form>
+
         <a href="{{ route('festivals.index') }}" class="btn btn-primary">
             Back to Festivals
         </a>
