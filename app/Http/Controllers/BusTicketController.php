@@ -54,15 +54,16 @@ class BusTicketController extends Controller
         return view('bustickets.create', compact('festivals', 'users'));
     }
 
+    // Store a new busticket (customer action)
     public function store(Request $request)
     {
         // Validate the incoming request data
-        $request->validate([
+        $validatedData = $request->validate([
             'festival_id' => 'required|exists:festivals,id', // Ensure the festival exists
         ]);
 
         // Find the selected festival
-        $festival = Festival::findOrFail($request->festival_id);
+        $festival = Festival::findOrFail($validatedData['festival_id']);
 
         // Find the first available bus with 'reserve' status for the selected festival
         $bus = $festival->buses()->where('status', 'reserve')->first();
@@ -89,6 +90,7 @@ class BusTicketController extends Controller
         // Redirect back to the bus tickets list with a success message
         return redirect()->route('bustickets.index')->with('success', 'Ticket booked successfully!');
     }
+
 
     // Show details of a specific ticket
     public function show(BusTicket $busticket)

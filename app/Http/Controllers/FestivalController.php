@@ -41,7 +41,7 @@ class FestivalController extends Controller
     public function store(Request $request)
     {
         // Validate the incoming request data to ensure proper input
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|string|unique:festivals', // Festival name must be unique
             'date' => 'required|date', // Festival date must be a valid date
             'location' => 'required|string', // Festival location must be a string
@@ -49,12 +49,13 @@ class FestivalController extends Controller
             'genre' => 'nullable|string', // Genre is optional
         ]);
 
-        // Create the festival in the database using mass assignment
-        Festival::create($request->only(['name', 'date', 'location', 'description', 'genre']));
+        // Create the festival in the database using the validated data
+        Festival::create($validatedData);
 
         // Redirect the admin back to the festivals index page with a success message
         return redirect()->route('festivals.index')->with('success', 'Festival created successfully!');
     }
+
 
     // Show a specific festival with bus and ticket counts
     public function show($id)
@@ -76,8 +77,8 @@ class FestivalController extends Controller
     // Update the festival after form submission
     public function update(Request $request, Festival $festival)
     {
-        // Validate the incoming request data to ensure proper input
-        $request->validate([
+        // Validate the incoming request data
+        $validatedData = $request->validate([
             'name' => 'required|string|unique:festivals,name,' . $festival->id, // Ensure the festival name is unique except for the current festival
             'date' => 'required|date', // Festival date must be a valid date
             'location' => 'required|string', // Festival location must be a string
@@ -85,10 +86,10 @@ class FestivalController extends Controller
             'genre' => 'nullable|string', // Genre is optional
         ]);
 
-        // Update the festival in the database using mass assignment
-        $festival->update($request->only(['name', 'date', 'location', 'description', 'genre']));
+        // Update the festival using the validated data
+        $festival->update($validatedData);
 
-        // Redirect the admin back to the festivals index page with a success message
+        // Redirect back to the festivals index page with a success message
         return redirect()->route('festivals.index')->with('success', 'Festival updated successfully!');
     }
 
