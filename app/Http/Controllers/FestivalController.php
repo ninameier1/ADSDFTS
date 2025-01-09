@@ -26,7 +26,7 @@ class FestivalController extends Controller
             ->get();
 
         // Return the 'festivals.index' view, passing the festivals data and sorting info
-        return view('festivals.index', compact('festivals', 'sortColumn', 'sortDirection'));
+        return view('admin.festivals.index', compact('festivals', 'sortColumn', 'sortDirection'));
     }
 
 
@@ -34,7 +34,7 @@ class FestivalController extends Controller
     public function create()
     {
         // Return the 'festivals.create' view where the admin can create a new festival
-        return view('festivals.create');
+        return view('admin.festivals.create');
     }
 
     // Store a new festival (manual creation by admin)
@@ -53,7 +53,7 @@ class FestivalController extends Controller
         Festival::create($validatedData);
 
         // Redirect the admin back to the festivals index page with a success message
-        return redirect()->route('festivals.index')->with('success', 'Festival created successfully!');
+        return redirect()->route('admin.festivals.index')->with('success', 'Festival created successfully!');
     }
 
 
@@ -64,14 +64,14 @@ class FestivalController extends Controller
         $festival = Festival::withCount('buses', 'bustickets')->findOrFail($id);
 
         // Return the 'festivals.index' view, passing the festival data to the view
-        return view('festivals.show', compact('festival'));
+        return view('admin.festivals.show', compact('festival'));
     }
 
     // Show the form for editing the specified festival
     public function edit(Festival $festival)
     {
         // Return the 'festivals.edit' view where the admin can edit the festival details
-        return view('festivals.edit', compact('festival'));
+        return view('admin.festivals.edit', compact('festival'));
     }
 
     // Update the festival after form submission
@@ -90,7 +90,7 @@ class FestivalController extends Controller
         $festival->update($validatedData);
 
         // Redirect back to the festivals index page with a success message
-        return redirect()->route('festivals.index')->with('success', 'Festival updated successfully!');
+        return redirect()->route('admin.festivals.index')->with('success', 'Festival updated successfully!');
     }
 
     // Remove a festival (delete the festival from the database)
@@ -100,6 +100,6 @@ class FestivalController extends Controller
         $festival->delete();
 
         // Redirect the admin back to the festivals index page with a success message
-        return redirect()->route('festivals.index')->with('success', 'Festival deleted successfully!');
+        return redirect()->route('admin.festivals.index')->with('success', 'Festival deleted successfully!');
     }
 }

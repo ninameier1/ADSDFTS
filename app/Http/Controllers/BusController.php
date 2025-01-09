@@ -15,7 +15,7 @@ class BusController extends Controller
         $buses = Bus::withCount('bustickets')->get();
 
         // Return the 'buses.index' view, passing the buses data to the view
-        return view('buses.index', compact('buses'));
+        return view('admin.buses.index', compact('buses'));
     }
 
     // Show the form to create a new bus (manual creation by admin)
@@ -25,7 +25,7 @@ class BusController extends Controller
         $festivals = Festival::all();  // Admin selects the festival the bus is associated with
 
         // Return the 'buses.create' view, passing the festivals data to the view
-        return view('buses.create', compact('festivals'));
+        return view('admin.buses.create', compact('festivals'));
     }
 
     // Create a new bus (manual creation by admin)
@@ -45,14 +45,14 @@ class BusController extends Controller
         Bus::create($validatedData);
 
         // Redirect the admin back to the bus index page with a success message
-        return redirect()->route('buses.index')->with('success', 'Bus created successfully!');
+        return redirect()->route('admin.buses.index')->with('success', 'Bus created successfully!');
     }
 
 
     // Show a specific bus
     public function show(Bus $bus)
     {
-        return view('buses.show', compact('bus')); // Return the 'buses.show' view with the bus data
+        return view('admin.buses.show', compact('bus')); // Return the 'buses.show' view with the bus data
     }
 
     // Show the form for editing the specified bus
@@ -62,7 +62,7 @@ class BusController extends Controller
         $festivals = Festival::all();  // Admin may change the festival the bus is associated with
 
         // Return the 'buses.edit' view, passing the bus and festivals data to the view
-        return view('buses.edit', compact('bus', 'festivals'));
+        return view('admin.buses.edit', compact('bus', 'festivals'));
     }
 
     // Update the bus after form submission
@@ -82,7 +82,7 @@ class BusController extends Controller
         $bus->update($validatedData);
 
         // Redirect back to the bus index page with a success message
-        return redirect()->route('buses.index')->with('success', 'Bus updated successfully!');
+        return redirect()->route('admin.buses.index')->with('success', 'Bus updated successfully!');
     }
 
     // Remove a bus (delete the bus from the database)
@@ -92,6 +92,6 @@ class BusController extends Controller
         $bus->delete();
 
         // Redirect the admin back to the bus index page with a success message
-        return redirect()->route('buses.index')->with('success', 'Bus deleted successfully!');
+        return redirect()->route('admin.buses.index')->with('success', 'Bus deleted successfully!');
     }
 }

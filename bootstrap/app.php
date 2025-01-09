@@ -12,13 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
+
     ->withMiddleware(function (Middleware $middleware)
     {
         // Adding auth for admin role
         $middleware->alias([
             'admin' => isAdmin::class,
         ]);
-//        $middleware->append(isAdmin::class);
     })
 
     ->withExceptions(function (Exceptions $exceptions)

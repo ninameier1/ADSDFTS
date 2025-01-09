@@ -35,7 +35,7 @@ class BusTicketController extends Controller
             ->get();
 
         // Return the view with the bustickets and the search query
-        return view('bustickets.index', compact('bustickets', 'search'));
+        return view('admin.bustickets.index', compact('bustickets', 'search'));
     }
 
     // Show the form for booking a busticket (customer action)
@@ -99,18 +99,18 @@ class BusTicketController extends Controller
         return view('bustickets.show', compact('busticket'));
     }
 
-//    // Show the form for editing an existing busticket (admin action)
-//    public function edit(BusTicket $busticket)
-//    {
-//        // Fetch the festival associated with the current bus ticket
-//        $festival = $busticket->festival;
-//
-//        // Fetch only buses associated with this festival
-//        $buses = $festival->buses;
-//
-//        // Return the 'bustickets.edit' view, passing the busticket, buses, and festival data
-//        return view('bustickets.edit', compact('busticket', 'buses', 'festival'));
-//    }
+    // Show the form for editing an existing busticket (admin action)
+    public function edit(BusTicket $busticket)
+    {
+        // Fetch the festival associated with the current bus ticket
+        $festival = $busticket->festival;
+
+        // Fetch only buses associated with this festival
+        $buses = $festival->buses;
+
+        // Return the 'bustickets.edit' view, passing the busticket, buses, and festival data
+        return view('admin.bustickets.edit', compact('busticket', 'buses', 'festival'));
+    }
 
 
 //    // Update a busticket manually (admin action)
@@ -140,6 +140,6 @@ class BusTicketController extends Controller
         $busticket->delete();
 
         // Redirect back to the bustickets list with a success message
-        return redirect()->route('bustickets.index')->with('success', 'Ticket canceled successfully!');
+        return redirect()->route('admin.bustickets.index')->with('success', 'Ticket canceled successfully!');
     }
 }
