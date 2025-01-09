@@ -1,19 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Customer\Bus;
 use Illuminate\Http\Request;
 
-class BusTicketController extends Controller
+class BusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Display bus information
     public function index()
     {
-        //
+        // Fetch all buses along with the count of tickets associated with each bus
+        $buses = Bus::withCount('bustickets')->get();
+
+        // Return the 'buses.index' view, passing the buses data to the view
+        return view('admin.buses.index', compact('buses'));
     }
+
 
     /**
      * Show the form for creating a new resource.
