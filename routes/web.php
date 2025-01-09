@@ -1,18 +1,26 @@
 <?php
 
+use App\Http\Controllers\Admin\BusController;
+use App\Http\Controllers\Admin\BusTicketController;
+use App\Http\Controllers\Admin\FestivalController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\BusController;
-use App\Http\Controllers\FestivalController;
-use App\Http\Controllers\BusTicketController;
 use Illuminate\Support\Facades\Route;
 
-// Bus, Festival and BusTicket CRUD routes
+// Admin panel CRUD routes
 Route::prefix('admin')->group(function ()
     {
         Route::resource('buses', BusController::class);
         Route::resource('festivals', FestivalController::class);
         Route::resource('bustickets', BusTicketController::class);
     })->middleware('isAdmin'); // Keep it secret, keep it safe
+
+// Customer side CRUD routes
+Route::prefix('customer')->namespace('App\Http\Controllers\Customer')->group(function () {
+    Route::resource('buses', BusController::class);
+    Route::resource('festivals', FestivalController::class);
+    Route::resource('bustickets', BusTicketController::class);
+});
+
 
 // Homepage
 Route::get('/', function ()

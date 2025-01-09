@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Festival;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,8 @@ class FestivalController extends Controller
 
         // Validate that the sorting column is allowed
         $allowedColumns = ['name', 'date', 'location', 'genre', 'buses_count', 'bustickets_count'];
-        if (!in_array($sortColumn, $allowedColumns)) {
+        if (!in_array($sortColumn, $allowedColumns))
+        {
             $sortColumn = 'date'; // Fallback to default column
         }
 
