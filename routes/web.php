@@ -14,13 +14,13 @@ Route::prefix('admin')->group(function ()
         Route::resource('bustickets', BusTicketController::class);
     })->middleware('isAdmin'); // Keep it secret, keep it safe
 
-// Customer side CRUD routes
-Route::prefix('customer')->namespace('App\Http\Controllers\Customer')->group(function () {
-    Route::resource('buses', BusController::class);
-    Route::resource('festivals', FestivalController::class);
-    Route::resource('bustickets', BusTicketController::class);
-});
-
+// Customer routes
+Route::group([], function ()
+    {
+        Route::resource('buses', \App\Http\Controllers\BusController::class);
+        Route::resource('festivals', \App\Http\Controllers\FestivalController::class);
+        Route::resource('bustickets', \App\Http\Controllers\BusTicketController::class);
+    });
 
 // Homepage
 Route::get('/', function ()
