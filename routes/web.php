@@ -1,32 +1,31 @@
 <?php
 
-use App\Http\Controllers\Admin\BusController;
-use App\Http\Controllers\Admin\BusTicketController;
-use App\Http\Controllers\Admin\FestivalController;
+use App\Http\Controllers\Admin\BusController as AdminBusController;
+use App\Http\Controllers\Admin\BusTicketController as AdminBusTicketController;
+use App\Http\Controllers\Admin\FestivalController as AdminFestivalController;
+use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Admin panel CRUD routes
 Route::prefix('admin')->group(function ()
     {
-        Route::resource('buses', BusController::class);
-        Route::resource('festivals', FestivalController::class);
-        Route::resource('bustickets', BusTicketController::class);
+        Route::resource('buses', AdminBusController::class);
+        Route::resource('festivals', AdminFestivalController::class);
+        Route::resource('bustickets', AdminBusTicketController::class);
     })->middleware('isAdmin'); // Keep it secret, keep it safe
 
 // Customer routes
-Route::group([], function ()
-    {
-        Route::resource('buses', \App\Http\Controllers\BusController::class);
-        Route::resource('festivals', \App\Http\Controllers\FestivalController::class);
-        Route::resource('bustickets', \App\Http\Controllers\BusTicketController::class);
-    });
+Route::resource('buses', BusController::class);
+Route::resource('festivals', FestivalController::class);
+Route::resource('bustickets', BusTicketController::class);
+
 
 // Homepage
-Route::get('/', function ()
-    {
-        return view('welcome');
-    });
+Route::get('/', function () {
+    return view('welcome');
+})->name('welcome');
+
 
 // Dashboard route (requires authentication)
 Route::get('/dashboard', function ()
