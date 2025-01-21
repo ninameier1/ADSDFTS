@@ -27,12 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Drop foreign key constraint before dropping the festivals table
-        Schema::table('bustickets', function (Blueprint $table)
-        {
-            $table->dropForeign(['festival_id']); // Adjust the foreign key column name if needed
-        });
-
         Schema::dropIfExists('festivals');
     }
 };

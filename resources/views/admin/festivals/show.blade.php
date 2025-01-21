@@ -32,18 +32,18 @@
             </tbody>
         </table>
         <!-- Edit button -->
-        <a href="{{ route('festivals.edit', $festival) }}" class="btn btn-warning">
+        <a href="{{ route('admin.festivals.edit', $festival) }}" class="btn btn-warning">
             Edit Festival
         </a>
 
         <!-- Delete button with double check -->
-        <form action="{{ route('festivals.destroy', $festival) }}" method="POST" style="display:inline;">
+        <form action="{{ route('admin.festivals.destroy', $festival) }}" method="POST" style="display:inline;">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this festival?')">Delete Festival</button>
         </form>
 
-        <a href="{{ route('festivals.index') }}" class="btn btn-primary">
+        <a href="{{ route('admin.festivals.index') }}" class="btn btn-primary">
             Back to Festivals
         </a>
     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\FestivalController as AdminFestivalController;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\isAdmin;
 
 // Admin panel CRUD routes
 Route::prefix('admin')->group(function ()
@@ -13,7 +14,7 @@ Route::prefix('admin')->group(function ()
         Route::resource('buses', AdminBusController::class);
         Route::resource('festivals', AdminFestivalController::class);
         Route::resource('bustickets', AdminBusTicketController::class);
-    })->middleware('isAdmin'); // Keep it secret, keep it safe
+    })->middleware(isAdmin::class); // Keep it secret, keep it safe
 
 // Customer routes
 Route::resource('buses', BusController::class);
@@ -22,9 +23,10 @@ Route::resource('bustickets', BusTicketController::class);
 
 
 // Homepage
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', function ()
+    {
+        return view('welcome');
+    })->name('welcome')->middleware(isAdmin::class);
 
 
 // Dashboard route (requires authentication)

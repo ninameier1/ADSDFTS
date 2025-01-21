@@ -18,11 +18,15 @@ class BusFactory extends Factory
     protected $model = Bus::class;
     public function definition(): array
     {
-        return [
+        // Predefined cities to choose from
+        $cities = ['Utrecht', 'Almere', 'Amsterdam'];
+
+        return
+        [
             'bus_number' => 'Bus-' . uniqid(), // Bus counter
             'status' => 'scheduled', // Set the default status to 'scheduled'
             'capacity' => 35, // Duh
-            'starting_point' => fake()->city(), // Nullable starting point, optional
+            'starting_point' => fake()->randomElement($cities), // Randomly pick a city from the predefined list
             'departure_time' => fake()->dateTimeBetween('now', '+5 days'), // Nullable departure time, optional yay
             'arrival_time' => fake()->dateTimeBetween('+5 days', '+10 days'), // Nullable arrival time, optional
         ];

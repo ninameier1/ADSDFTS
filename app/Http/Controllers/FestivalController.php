@@ -46,13 +46,17 @@ class FestivalController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Show a specific festival to customers
+    public function show($id)
     {
-        //
+        // Fetch the specific festival by its ID
+        $festival = Festival::findOrFail($id);
+
+        // Return the 'festivals.show' view for customers, passing the festival data
+        return view('festivals.show', compact('festival'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
