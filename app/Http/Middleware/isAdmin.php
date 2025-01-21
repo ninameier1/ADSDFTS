@@ -17,9 +17,9 @@ class isAdmin
     public function handle(Request $request, Closure $next): Response
     {
         // Check if the authenticated user has an admin role
-        if (auth()->check() && !auth()->user()->isAdmin()) {
-            // If the user is not an admin, redirect them back to the homepage
-            return redirect('/');
+        if (!auth()->check() || !auth()->user()->isAdmin())
+        {
+            return redirect('/login');
         }
         return $next($request); // Proceed to the next middleware or controller
     }

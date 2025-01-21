@@ -14,7 +14,7 @@ Route::prefix('admin')->group(function ()
         Route::resource('buses', AdminBusController::class);
         Route::resource('festivals', AdminFestivalController::class);
         Route::resource('bustickets', AdminBusTicketController::class);
-    })->middleware(isAdmin::class); // Keep it secret, keep it safe
+    })->middleware('admin'); // Keep it secret, keep it safe
 
 // Customer routes
 Route::resource('buses', BusController::class);
@@ -26,7 +26,7 @@ Route::resource('bustickets', BusTicketController::class);
 Route::get('/', function ()
     {
         return view('welcome');
-    })->name('welcome')->middleware(isAdmin::class);
+    })->name('welcome');
 
 
 // Dashboard route (requires authentication)
