@@ -25,10 +25,11 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('password'), // Default password for all users? unsure
-            'role' => fake()->randomElement(['admin', 'customer']),
+            'role' => 'customer', // Default role is always 'customer'
             'points' => fake()->numberBetween(0, 1000),
             'remember_token' => Str::random(10),
         ];
