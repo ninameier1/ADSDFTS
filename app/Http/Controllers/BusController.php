@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Customer\Bus;
 use Illuminate\Http\Request;
 
 class BusController extends Controller
@@ -14,7 +13,7 @@ class BusController extends Controller
         $buses = Bus::withCount('bustickets')->get();
 
         // Return the 'buses.index' view, passing the buses data to the view
-        return view('admin.buses.index', compact('buses'));
+        return view('buses.index', compact('buses'));
     }
 
 

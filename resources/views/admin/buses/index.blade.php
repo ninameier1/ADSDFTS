@@ -11,7 +11,7 @@
             </div>
         @endif
 
-        <a href="{{ route('buses.create') }}" class="btn btn-primary mb-3">Add New Bus</a>
+        <a href="{{ route('admin.buses.create') }}" class="btn btn-primary mb-3">Add New Bus</a>
 
         <table class="table">
             <thead>
@@ -33,7 +33,7 @@
                     <td>{{ $bus->starting_point }}</td>
                     <td>{{ $bus->bustickets_count }}</td>
                     <td>
-                        <a href="{{ route('buses.show', $bus) }}" class="btn btn-info">Show</a>
+                        <a href="{{ route('admin.buses.show', $bus) }}" class="btn btn-info">Show</a>
                     </td>
                 </tr>
             @endforeach
