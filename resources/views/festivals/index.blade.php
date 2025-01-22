@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@php
+    $header = 'Festivals we travel to';
+@endphp
+
 @section('content')
     <div class="container">
-        <h1>Festivals</h1>
-
         <table class="table">
             <thead>
             <tr>
