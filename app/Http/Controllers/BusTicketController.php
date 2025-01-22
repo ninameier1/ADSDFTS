@@ -12,10 +12,17 @@ class BusTicketController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $search = $request->input('search', '');
+
+        $bustickets = Busticket::with(['user', 'bus', 'festival'])
+            ->where('user_id', auth()->id()) // Filter by the logged-in user
+            ->get();
+
+        return view('bustickets.index', compact('bustickets', 'search'));
     }
+
 
     // Show the form for booking a busticket (customer action)
     public function create()

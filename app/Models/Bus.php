@@ -19,6 +19,13 @@ class Bus extends Model
         'festival_id',
     ];
 
+    // Carbon yet again!
+    protected $casts = [
+        'departure_time' => 'datetime',
+        'arrival_time' => 'datetime',
+    ];
+
+
     // A bus can have many bus tickets (one-to-many relationship)
     public function busTickets() // Up to 35 tickets can be sold for one bus
     {

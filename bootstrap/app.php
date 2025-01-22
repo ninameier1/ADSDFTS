@@ -17,7 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     {
         // Adding auth for admin role
         $middleware->alias([
-            'isAdmin' => isAdmin::class,
+            'admin' => isAdmin::class,
         ]);
     })
 

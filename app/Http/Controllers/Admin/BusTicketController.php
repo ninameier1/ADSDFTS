@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class BusTicketController extends Controller
 {
-    // Display a list of all bus tickets (for admin)
+    // Display a list of all bus tickets
     public function index(Request $request)
     {
         // Get the search query from the request
@@ -21,13 +21,17 @@ class BusTicketController extends Controller
         ->when($search, function ($query, $search)
         {
             // Filter by customer name, bus number, or festival name
-            return $query->whereHas('user', function ($query) use ($search) {
-                $query->where('name', 'like', "%{$search}%"); // Search by user name
+            return $query->whereHas('user', function ($query) use ($search)
+            {
+                $query->where('first_name', 'like', "%{$search}%"); // Search by customer name
+                $query->where('last_name', 'like', "%{$search}%");
             })
-                ->orWhereHas('bus', function ($query) use ($search) {
+                ->orWhereHas('bus', function ($query) use ($search)
+                {
                     $query->where('bus_number', 'like', "%{$search}%"); // Search by bus number
                 })
-                ->orWhereHas('festival', function ($query) use ($search) {
+                ->orWhereHas('festival', function ($query) use ($search)
+                {
                     $query->where('name', 'like', "%{$search}%"); // Search by festival name
                 });
         })
@@ -43,6 +47,35 @@ class BusTicketController extends Controller
         // Return the 'bustickets.show' view with the busticket data
         return view('admin.bustickets.show', compact('busticket'));
     }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    // Remove a busticket
+    public function destroy(BusTicket $busticket)
+    {
+        // Delete the specified busticket
+        $busticket->delete();
+
+        // Redirect back to the bustickets list with a success message
+        return redirect()->route('admin.bustickets.index')->with('success', 'Ticket canceled successfully!');
+    }
+}
+
+
 
 //    // Show the form for editing an existing busticket (admin action)
 //    public function edit(BusTicket $busticket)
@@ -76,15 +109,3 @@ class BusTicketController extends Controller
 //        // Redirect back to the bustickets list with a success message
 //        return redirect()->route('bustickets.index')->with('success', 'Ticket updated successfully!');
 //    }
-
-
-    // Remove a busticket (admin action)
-    public function destroy(BusTicket $busticket)
-    {
-        // Delete the specified busticket
-        $busticket->delete();
-
-        // Redirect back to the bustickets list with a success message
-        return redirect()->route('admin.bustickets.index')->with('success', 'Ticket canceled successfully!');
-    }
-}

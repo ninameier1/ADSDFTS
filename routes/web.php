@@ -10,42 +10,37 @@ use App\Http\Controllers\BusController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isAdmin;
 
-// Admin panel CRUD routes
-Route::prefix('admin')->group(function ()
-    {
-        Route::resource('buses', AdminBusController::class,
-        ['names' => [
-            'index' => 'admin.buses.index',
-            'show' => 'admin.buses.show',
-            'create' => 'admin.buses.create',
-            'store' => 'admin.buses.store',
-            'edit' => 'admin.buses.edit',
-            'update' => 'admin.buses.update',
-            'destroy' => 'admin.buses.destroy',
-        ]]);
-        Route::resource('festivals', AdminFestivalController::class,
-            ['names' => [
-            'index' => 'admin.festivals.index',
-            'show' => 'admin.festivals.show',
-            'create' => 'admin.festivals.create',
-            'store' => 'admin.festivals.store',
-            'edit' => 'admin.festivals.edit',
-            'update' => 'admin.festivals.update',
-            'destroy' => 'admin.festivals.destroy',
-        ]]);
-        Route::resource('bustickets', AdminBusTicketController::class,
-            ['names' => [
-                'index' => 'admin.bustickets.index',
-                'show' => 'admin.bustickets.show',
-                'create' => 'admin.bustickets.create',
-                'store' => 'admin.bustickets.store',
-                'edit' => 'admin.bustickets.edit',
-                'update' => 'admin.bustickets.update',
-                'destroy' => 'admin.bustickets.destroy',
-            ]]);
-    })->middleware('isAdmin'); // Keep it secret, keep it safe
 
-// Customer routes
+Route::get('/admin', function ()
+    {
+        return view('admin/dashboard');
+    })->name('admin.dashboard');
+
+// Admin panel CRUD routes
+Route::prefix('admin')->middleware('admin')->group(function () // Keep it secret, keep it safe
+    {
+        $resources = [
+            'buses' => AdminBusController::class,
+            'festivals' => AdminFestivalController::class,
+            'bustickets' => AdminBusTicketController::class,
+        ];
+
+        foreach ($resources as $resource => $controller) {
+            Route::resource($resource, $controller, [
+                'names' => [
+                    'index' => "admin.{$resource}.index",
+                    'show' => "admin.{$resource}.show",
+                    'create' => "admin.{$resource}.create",
+                    'store' => "admin.{$resource}.store",
+                    'edit' => "admin.{$resource}.edit",
+                    'update' => "admin.{$resource}.update",
+                    'destroy' => "admin.{$resource}.destroy",
+                ],
+            ]);
+        }
+    });
+
+// Customer CRUD routes
 Route::resource('festivals', FestivalController::class);
 Route::resource('buses', BusController::class);
 Route::resource('bustickets', BusTicketController::class);
@@ -71,6 +66,21 @@ Route::middleware('auth')->group(function ()
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
+
+Route::get('/faq', function ()
+    {
+        return view('service/faq');
+    })->name('faq');
+
+Route::get('/privacy-policy', function ()
+    {
+        return view('service/privacy-policy');
+    })->name('privacy-policy');
+
+Route::get('/terms-of-service', function ()
+    {
+        return view('service/terms-of-service');
+    })->name('terms-of-service');
 
 // Auth routes
 require __DIR__.'/auth.php';
