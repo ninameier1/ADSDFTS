@@ -29,22 +29,39 @@
         <p>You know the rules and so do I:</p>
 
         <p><strong>1. We’ll Never Give You Up</strong></p>
-        <p>Our commitment is to provide you with the best service possible. We will never give you up, no matter what.</p>
+        <p>We will never give you up or let you down when it comes to your travel plans. Our buses are always ready to get you to your destination safely and on time.</p>
 
         <p><strong>2. We’ll Never Let You Down</strong></p>
-        <p>Your satisfaction is our top priority. We promise to never let you down, and we will always be here for you when you need us.</p>
+        <p>Your satisfaction is our priority. We will always strive to deliver an excellent service and provide a smooth journey for you. If there’s an issue, we’ll resolve it quickly.</p>
 
         <p><strong>3. We’ll Never Run Around and Desert You</strong></p>
-        <p>We value your trust. You can rely on us to always stand by you, and we will never run around and desert you.</p>
+        <p>You can count on us for your trips. We will never cancel your ride without good reason, and we’ll always keep you informed of any changes or disruptions.</p>
 
         <p><strong>4. We’ll Never Make You Cry</strong></p>
-        <p>We want to create a positive experience for you. Our service will never cause you pain or frustration. If you encounter any issues, we will resolve them swiftly.</p>
+        <p>Our customer service team is here to help you with any questions or issues you may have. We’ll always do our best to ensure that your experience is a positive one. If something goes wrong, we’ll make it right.</p>
 
         <p><strong>5. We’ll Never Tell a Lie and Hurt You</strong></p>
-        <p>Transparency is key. We’ll always be honest with you and ensure that your experience with us is trustworthy and secure.</p>
+        <p>We believe in honesty and transparency. All of our pricing, schedules, and policies will be communicated clearly. We’ll never deceive you or mislead you about our services.</p>
 
-        <p><strong>6. Amendments to These Terms</strong></p>
-        <p>We reserve the right to update or amend these terms. But rest assured, we will never break our promises to you. We’ll notify you of any significant changes.</p>
+        <p><strong>6. Your Responsibilities</strong></p>
+        <p>While we promise to take care of you, we also ask that you take care of the bus and your fellow passengers. Please follow all safety instructions, respect the rules, and be considerate to others. We’re all in this together!</p>
+
+        <p><strong>7. Changes to Our Service</strong></p>
+        <p>We reserve the right to modify, suspend, or cancel services as needed. In the rare event that a change affects your booking, we will inform you promptly, and we’ll work with you to find a suitable alternative.</p>
+
+        <p><strong>8. Booking and Payment</strong></p>
+        <p>You agree to provide accurate information when booking your tickets, and you understand that payments for our services are final and non-refundable, unless a cancellation or change is initiated by us.</p>
+
+        <p><strong>9. We’ll Never Break Our Promises</strong></p>
+        <p>We will always fulfill our commitment to providing excellent and reliable transportation services. We will never break our promises to you, and we strive to keep our service at the highest standard.</p>
+
+        <p><strong>10. Liability</strong></p>
+        <p>We are not liable for delays or cancellations caused by weather, accidents, or any force majeure. However, we will always try to assist you and offer compensation where possible in line with our policies.</p>
+
+        <p><strong>11. Amendments to These Terms</strong></p>
+        <p>We may update or change these terms of service at any time. Any changes will be communicated to you, and we’ll always ensure you’re aware of any updates that affect your experience with us.</p>
+
+        <p>By using our services, you agree to the above terms and conditions. Thank you for choosing us for your journey. We’ll never give you up on your travel needs!</p>
     @elseif ($type === 'faq')
         <p><strong>Q: What is your refund policy?</strong></p>
         <p>A: We will never give you up, and we will never let you down. Your satisfaction is guaranteed, or we’ll make it right!</p>

@@ -1,27 +1,27 @@
-<footer class="bg-gray-800 text-white py-6">
+<footer class="bg-secondary dark:bg-dark text-neutral dark:text-darktext py-6">
     <div class="max-w-7xl mx-auto text-center">
 
         <!-- Social Media Links -->
         <div class="mb-4">
-            <a href="https://facebook.com" target="_blank" class="mx-2 text-lg hover:text-blue-500">
+            <a href="https://facebook.com" target="_blank" class="mx-2 text-lg hover:text-dark dark:hover:text-secondary">
                 <i class="fab fa-facebook"></i> Facebook
             </a>
-            <a href="https://twitter.com" target="_blank" class="mx-2 text-lg hover:text-blue-400">
+            <a href="https://twitter.com" target="_blank" class="mx-2 text-lg hover:text-dark dark:hover:text-secondary">
                 <i class="fab fa-twitter"></i> Twitter
             </a>
-            <a href="https://instagram.com" target="_blank" class="mx-2 text-lg hover:text-pink-500">
+            <a href="https://instagram.com" target="_blank" class="mx-2 text-lg hover:text-dark dark:hover:text-secondary">
                 <i class="fab fa-instagram"></i> Instagram
             </a>
-            <a href="https://linkedin.com" target="_blank" class="mx-2 text-lg hover:text-blue-700">
+            <a href="https://linkedin.com" target="_blank" class="mx-2 text-lg hover:text-dark dark:hover:text-secondary">
                 <i class="fab fa-linkedin"></i> LinkedIn
             </a>
         </div>
 
         <!-- Footer Links -->
         <div class="mb-4">
-            <a href="{{ route('faq') }}" class="text-sm hover:text-gray-300">FAQ</a> |
-            <a href="{{ route('privacy-policy') }}" class="text-sm hover:text-gray-300">Privacy Policy</a> |
-            <a href="{{ route('terms-of-service') }}" class="text-sm hover:text-gray-300">Terms of Service</a>
+            <a href="{{ route('faq') }}" class="text-sm hover:text-dark dark:hover:text-secondary">FAQ</a> |
+            <a href="{{ route('privacy-policy') }}" class="text-sm hover:text-dark dark:hover:text-secondary">Privacy Policy</a> |
+            <a href="{{ route('terms-of-service') }}" class="text-sm hover:text-dark dark:hover:text-secondary">Terms of Service</a>
         </div>
 
         <!-- Address and Contact -->

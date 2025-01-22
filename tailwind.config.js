@@ -28,9 +28,11 @@ export default
                     neutral: '#e2e8f0', // Neutral background
                     dark: '#0f172a', // Dark mode
                     darkneutral: '#1e293b',
+                    darktext: '#94a3b8'
                 },
             },
         },
 
         plugins: [forms],
     };
+

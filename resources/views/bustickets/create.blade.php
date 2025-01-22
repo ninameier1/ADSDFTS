@@ -1,8 +1,11 @@
 @extends('layouts.app')
 
+@php
+$header = 'Book a Busticket'
+@endphp
+
 @section('content')
     <div class="container">
-        <h1>Book a New Ticket</h1>
 
         <form action="{{ route('bustickets.store') }}" method="POST">
             @csrf
