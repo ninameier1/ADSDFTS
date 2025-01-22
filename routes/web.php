@@ -5,20 +5,49 @@ use App\Http\Controllers\Admin\BusTicketController as AdminBusTicketController;
 use App\Http\Controllers\Admin\FestivalController as AdminFestivalController;
 use App\Http\Controllers\FestivalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BusTicketController;
+use App\Http\Controllers\BusController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isAdmin;
 
 // Admin panel CRUD routes
 Route::prefix('admin')->group(function ()
     {
-        Route::resource('buses', AdminBusController::class);
-        Route::resource('festivals', AdminFestivalController::class);
-        Route::resource('bustickets', AdminBusTicketController::class);
-    })->middleware('admin'); // Keep it secret, keep it safe
+        Route::resource('buses', AdminBusController::class,
+        ['names' => [
+            'index' => 'admin.buses.index',
+            'show' => 'admin.buses.show',
+            'create' => 'admin.buses.create',
+            'store' => 'admin.buses.store',
+            'edit' => 'admin.buses.edit',
+            'update' => 'admin.buses.update',
+            'destroy' => 'admin.buses.destroy',
+        ]]);
+        Route::resource('festivals', AdminFestivalController::class,
+            ['names' => [
+            'index' => 'admin.festivals.index',
+            'show' => 'admin.festivals.show',
+            'create' => 'admin.festivals.create',
+            'store' => 'admin.festivals.store',
+            'edit' => 'admin.festivals.edit',
+            'update' => 'admin.festivals.update',
+            'destroy' => 'admin.festivals.destroy',
+        ]]);
+        Route::resource('bustickets', AdminBusTicketController::class,
+            ['names' => [
+                'index' => 'admin.bustickets.index',
+                'show' => 'admin.bustickets.show',
+                'create' => 'admin.bustickets.create',
+                'store' => 'admin.bustickets.store',
+                'edit' => 'admin.bustickets.edit',
+                'update' => 'admin.bustickets.update',
+                'destroy' => 'admin.bustickets.destroy',
+            ]]);
+    })->middleware('isAdmin'); // Keep it secret, keep it safe
 
 // Customer routes
-Route::resource('buses', BusController::class);
 Route::resource('festivals', FestivalController::class);
+Route::resource('buses', BusController::class);
 Route::resource('bustickets', BusTicketController::class);
 
 
