@@ -17,8 +17,8 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('bustickets.create')" :active="request()->routeIs('bustickets')">
+                        {{ __('Book Bustickets') }}
                     </x-nav-link>
                 </div>
                 <button id="darkModeToggle" class="bg-neutral dark:bg-darkneutral p-2 rounded">

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminapp')
 
 @section('content')
     <div class="container">
@@ -14,10 +14,10 @@
                 <p class="card-text">Arrival Time: {{ $bus->arrival_time ? $bus->arrival_time->format('d-m-Y H:i') : 'N/A' }}</p>
 
                 <!-- Edit and Delete buttons -->
-                <a href="{{ route('buses.edit', $bus) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('admin.buses.edit', $bus) }}" class="btn btn-primary">Edit</a>
 
                 <!-- Delete form -->
-                <form action="{{ route('buses.destroy', $bus) }}" method="POST" style="display: inline-block;">
+                <form action="{{ route('admin.buses.destroy', $bus) }}" method="POST" style="display: inline-block;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger"
@@ -26,6 +26,6 @@
             </div>
         </div>
 
-        <a href="{{ route('buses.index') }}" class="btn btn-secondary mt-3">Back to Buses</a>
+        <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary mt-3">Back to Buses</a>
     </div>
 @endsection

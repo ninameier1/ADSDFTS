@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminapp')
 
 @section('content')
     <div class="container">
@@ -11,21 +11,20 @@
         @endif
 
         <!-- Search Form -->
-        <form method="GET" action="{{ route('bustickets.index') }}" class="mb-3">
+        <form method="GET" action="{{ route('admin.bustickets.index') }}" class="mb-3">
             <div class="input-group">
                 <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Search by customer name, bus number, or festival">
                 <button class="btn btn-primary" type="submit">Search</button>
                 <!-- Clear Search Button -->
-                <a href="{{ route('bustickets.index') }}" class="btn btn-secondary">Clear Search</a>
+                <a href="{{ route('admin.bustickets.index') }}" class="btn btn-secondary">Clear Search</a>
             </div>
         </form>
-
-        <a href="{{ route('bustickets.create') }}" class="btn btn-primary mb-3">Book New Ticket</a>
 
         <table class="table">
             <thead>
             <tr>
-                <th>Customer Name</th>
+                <th>Customer First Name</th>
+                <th>Customer Last Name</th>
                 <th>Bus Number</th>
                 <th>Festival</th>
                 <th>Seat Number</th>
@@ -35,13 +34,14 @@
             <tbody>
             @foreach($bustickets as $busticket)
                 <tr>
-                    <td>{{ $busticket->user->name }}</td>
+                    <td>{{ $busticket->user->first_name }}</td>
+                    <td>{{ $busticket->user->last_name }}</td>
                     <td>{{ $busticket->bus->bus_number }}</td>
                     <td>{{ $busticket->festival ? $busticket->festival->name : 'No Festival' }}</td>
                     <td>{{ $busticket->seat_number ?? 'N/A' }}</td>
                     <td>
                         <!-- Show Button -->
-                        <a href="{{ route('bustickets.show', $busticket) }}" class="btn btn-info">Show</a>
+                        <a href="{{ route('admin.bustickets.show', $busticket) }}" class="btn btn-info">Show</a>
                     </td>
                 </tr>
             @endforeach

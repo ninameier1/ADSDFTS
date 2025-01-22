@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminapp')
 
 @section('content')
     <div class="container">
@@ -15,6 +15,7 @@
             <thead>
             <tr>
                 <th>Bus Number</th>
+                <th>Starting point</th>
                 <th>Status</th>
                 <th>Capacity</th>
                 <th>Tickets Sold</th>
@@ -24,9 +25,11 @@
             @foreach($festival->buses as $bus)
                 <tr>
                     <td>{{ $bus->bus_number }}</td>
+                    <td>{{ $bus->starting_point }}</td>
                     <td>{{ ucfirst($bus->status) }}</td>
                     <td>{{ $bus->capacity }}</td>
                     <td>{{ $bus->soldTicketsCount() }}</td>
+                    <td><a href="{{ route('admin.buses.show', $bus) }}" class="btn btn-info">Show</a></td>
                 </tr>
             @endforeach
             </tbody>

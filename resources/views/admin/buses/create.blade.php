@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminapp')
 
 @section('content')
     <div class="container">
@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('buses.store') }}" method="POST">
+        <form action="{{ route('admin.buses.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="bus_number" class="form-label">Bus Number</label>
@@ -47,6 +47,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Create Bus</button>
         </form>
+        <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary mt-3">Back to Buses</a>
     </div>
 @endsection
 

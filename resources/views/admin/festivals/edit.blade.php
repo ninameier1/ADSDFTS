@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('layouts.adminapp')
 
 @section('content')
     <div class="container">
         <h1>Edit Festival</h1>
 
-        <form action="{{ route('festivals.update', $festival) }}" method="POST">
+        <form action="{{ route('admin.festivals.update', $festival) }}" method="POST">
             @csrf
             @method('PUT')
 
@@ -47,7 +47,7 @@
                 Update Festival
             </button>
         </form>
-        <a href="{{ route('festivals.show', $festival->id) }}" class="btn btn-primary">
+        <a href="{{ route('admin.festivals.show', $festival->id) }}" class="btn btn-primary">
             Back to Festival
         </a>
     </div>

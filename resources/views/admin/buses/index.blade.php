@@ -1,5 +1,4 @@
-
-@extends('layouts.app')
+@extends('layouts.adminapp')
 
 @section('content')
     <div class="container">
@@ -11,7 +10,7 @@
             </div>
         @endif
 
-        <a href="{{ route('admin.buses.create') }}" class="btn btn-primary mb-3">Add New Bus</a>
+        <a href="{{ route('admin.buses.create') }}" class="btn btn-primary mb-3">Create New Bus</a>
 
         <table class="table">
             <thead>
