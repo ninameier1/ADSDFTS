@@ -14,7 +14,7 @@ use App\Http\Middleware\isAdmin;
 Route::get('/admin', function ()
     {
         return view('admin/dashboard');
-    })->name('admin.dashboard');
+    })->name('admin.dashboard')->middleware('admin');
 
 // Admin panel CRUD routes
 Route::prefix('admin')->middleware('admin')->group(function () // Keep it secret, keep it safe
