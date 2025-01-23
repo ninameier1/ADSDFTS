@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-primary dark:bg-dark border-b border-secondary dark:border-secondary sticky">
+<nav x-data="{ open: false }" class="bg-primary dark:bg-dark  top-0 sticky">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -18,10 +18,17 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('bustickets.create')" :active="request()->routeIs('bustickets')">
-                        {{ __('Plan Your Trip') }}
+                        {{ __('Book Bustickets') }}
                     </x-nav-link>
                 </div>
-                <button id="darkModeToggle" class="bg-neutral dark:bg-darkneutral p-2 rounded hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                @auth
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('bustickets.index')" :active="request()->routeIs('bustickets')">
+                            {{ __('My Bustickets') }}
+                        </x-nav-link>
+                    </div>
+                @endauth
+                <button id="darkModeToggle" class="bg-neutral dark:bg-darkneutral p-2 rounded">
                     Toggle Dark Mode
                 </button>
             </div>

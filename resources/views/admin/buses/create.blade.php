@@ -35,7 +35,12 @@
             </div>
             <div class="mb-3">
                 <label for="starting_point" class="form-label">Starting Point</label>
-                <input type="text" name="starting_point" id="starting_point" class="form-control" value="{{ old('starting_point') }}">
+                <select name="starting_point" id="starting_point" class="form-control" required>
+                    <option value="" disabled selected>Select Starting Point</option>
+                    <option value="Almere" {{ old('starting_point') == 'Almere' ? 'selected' : '' }}>Almere</option>
+                    <option value="Amsterdam" {{ old('starting_point') == 'Amsterdam' ? 'selected' : '' }}>Amsterdam</option>
+                    <option value="Utrecht" {{ old('starting_point') == 'Utrecht' ? 'selected' : '' }}>Utrecht</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="departure_time" class="form-label">Departure Time</label>
