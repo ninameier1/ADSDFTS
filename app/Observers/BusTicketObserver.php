@@ -17,28 +17,30 @@ class BusTicketObserver
         $bus = $busTicket->bus;
 
         // Check if the bus is a reserve bus and if it has 35 tickets sold
-        if ($bus->status === 'reserve' && $bus->bustickets->count() >= 35)
-        {
+        if ($bus->status === 'reserve' && $bus->bustickets->count() >= 35) {
             // Update the bus status to 'scheduled' once 35 tickets are sold
             $bus->status = 'scheduled';
             $bus->save();
 
-            // Check if there is already a reserve bus for the festival
+            // Check if there is already a reserve bus for the same festival and starting point
             $existingReserveBus = Bus::where('festival_id', $bus->festival_id)
+                ->where('starting_point', $bus->starting_point) // Match the starting point
                 ->where('status', 'reserve')
                 ->first();
 
-            // If no reserve bus exists, create a new one
+            // If no reserve bus exists for the starting point, create a new one
             if (!$existingReserveBus) {
                 Bus::create([
                     'bus_number' => 'Reserve-' . uniqid(), // Automatically create a unique bus number
                     'capacity' => 35, // Set the capacity to 35 seats
                     'festival_id' => $bus->festival_id, // Link the new bus to the same festival
+                    'starting_point' => $bus->starting_point, // Use the same starting point
                     'status' => 'reserve', // Set the new bus status to 'reserve'
                 ]);
             }
         }
     }
+
 
 
     /**

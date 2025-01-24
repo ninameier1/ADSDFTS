@@ -12,14 +12,21 @@ class FestivalObserver
      */
     public function created(Festival $festival)
     {
-        // Automatically create a reserve bus for the newly created festival
-        Bus::create([
-            'bus_number' => 'Reserve-' . uniqid(), // Automatically create a unique bus number
-            'capacity' => 35, // Set the capacity to 35 seats
-            'festival_id' => $festival->id, // Link the new bus to the festival
-            'status' => 'reserve', // Set the new bus status to 'reserve'
-        ]);
+        // Define the starting points
+        $startingPoints = ['Almere', 'Amsterdam', 'Utrecht'];
+
+        // Automatically create a reserve bus for each starting point
+        foreach ($startingPoints as $startingPoint) {
+            Bus::create([
+                'bus_number' => 'Reserve-' . uniqid(), // Automatically create a unique bus number
+                'capacity' => 35, // Set the capacity to 35 seats
+                'festival_id' => $festival->id, // Link the new bus to the festival
+                'starting_point' => $startingPoint, // Assign the starting point
+                'status' => 'reserve', // Set the new bus status to 'reserve'
+            ]);
+        }
     }
+
 
     /**
      * Handle the Festival "updated" event.
