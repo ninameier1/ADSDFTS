@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
+@php
+$header = 'My Booked Tickets'
+@endphp
+
 @section('content')
     <div class="container">
-        <h1>My Bus Tickets</h1>
-
         @if($bustickets->isEmpty())
             <p>No tickets found.</p>
         @else

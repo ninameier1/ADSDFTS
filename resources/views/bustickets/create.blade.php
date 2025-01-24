@@ -1,59 +1,52 @@
 @extends('layouts.app')
 
 @php
-    $header = 'Book a Busticket'
+    $header = 'Confirm Your Booking'
 @endphp
 
 @section('content')
     <div class="container">
+
+        <!-- Display the trip details as normal text -->
+        <p class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-4">
+            Booking a trip from {{ request()->get('from') }} to {{ $festival->name }}.
+        </p>
+
+        <p class="text-md text-gray-600 dark:text-gray-300 mb-4">
+            Please confirm your personal information below.
+        </p>
+
+        <!-- The form for user information -->
         <form action="{{ route('bustickets.store') }}" method="POST">
             @csrf
-
-            <!-- Festival Selection (pre-filled with the passed festival) -->
-            <div class="form-group">
-                <label for="festival_id">Festival</label>
-                <select name="festival_id" id="festival_id" class="form-control" required>
-                    <option value="">Select Festival</option>
-                    @foreach($festivals as $festival)
-                        <option value="{{ $festival->id }}"
-                                @if(request()->get('festival') == $festival->name) selected @endif>
-                            {{ $festival->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- Starting Point (pre-filled with the passed starting point) -->
-            <div class="form-group">
-                <label for="from">Starting Point</label>
-                <input type="text" name="from" id="from" class="form-control" value="{{ request()->get('from') }}" required>
-            </div>
+            <!-- Hidden Inputs for Trip Details -->
+            <input type="hidden" name="from" value="{{ $from }}">
+            <input type="hidden" name="festival_id" value="{{ $festival->id }}">
+            <input type="hidden" name="user_id" value="{{ auth()->check() ? auth()->user()->id : '' }}">
 
             <!-- User Information (pre-filled with the logged-in user's name) -->
-            <div>
-                <x-input-label for="first_name" :value="__('First Name')" />
-                <x-text-input id="first_name" name="first_name" type="text" class="mt-1 block w-full" :value="old('first_name', $user->first_name)" required autofocus autocomplete="first_name" />
-                <x-input-error class="mt-2" :messages="$errors->get('first_name')" />
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="first_name" class="form-control" value="{{ old('first_name', auth()->user()->first_name) }}" required>
             </div>
 
-            <div>
-                <x-input-label for="last_name" :value="__('Last Name')" />
-                <x-text-input id="last_name" name="last_name" type="text" class="mt-1 block w-full" :value="old('last_name', $user->last_name)" required autofocus autocomplete="last_name" />
-                <x-input-error class="mt-2" :messages="$errors->get('last_name')" />
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" value="{{ old('last_name', auth()->user()->last_name) }}" required>
             </div>
 
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-                <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-                <x-input-error class="mt-2" :messages="$errors->get('email')" />
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" class="form-control" value="{{ old('email', auth()->user()->email) }}" required>
             </div>
 
-            <!-- Hidden User ID (Automatically set to the logged-in user) -->
-            <input type="hidden" name="user_id" value="{{ auth()->check() ? auth()->user()->id : '' }}">
+            <!-- Quantity -->
+            <label for="quantity">Number of Tickets:</label>
+            <input type="number" id="quantity" name="quantity" min="1" max="35" required>
 
             <!-- Submit Button -->
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Book Ticket</button>
+                <x-primary-button type="submit" class="btn btn-primary">Confirm</x-primary-button>
             </div>
         </form>
     </div>

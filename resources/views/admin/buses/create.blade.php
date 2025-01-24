@@ -1,9 +1,11 @@
 @extends('layouts.adminapp')
 
+@php
+    $header = 'Create a New Bus'
+@endphp
+
 @section('content')
     <div class="container">
-        <h1>Add New Bus</h1>
-
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -50,9 +52,9 @@
                 <label for="arrival_time" class="form-label">Arrival Time</label>
                 <input type="datetime-local" name="arrival_time" id="arrival_time" class="form-control" value="{{ old('arrival_time') }}">
             </div>
-            <button type="submit" class="btn btn-primary">Create Bus</button>
+            <x-primary-button type="submit">Create Bus</x-primary-button>
         </form>
-        <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary mt-3">Back to Buses</a>
+            <a href="{{ route('admin.buses.index') }}" class="btn btn-secondary mt-3"><x-primary-button>Back to Buses</x-primary-button></a>
     </div>
 @endsection
 
