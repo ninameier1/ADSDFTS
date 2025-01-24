@@ -91,7 +91,26 @@ class FestivalController extends Controller
     public function tripPlanner()
     {
         $festivals = Festival::all(); // Fetch all festivals
-        return view('trip-planner', compact('festivals'));
+        $from = 'Your Starting Point'; // Replace this with the actual starting point logic
+
+        return view('trip-planner', compact('festivals', 'from'));
     }
+
+    public function redirectToTicketBooking(Request $request)
+    {
+        // Get the data passed via GET
+        $from = $request->from;
+        $to = $request->to;
+
+        // Pass the data to the view
+        return view('bustickets.create', [
+            'from' => $from,
+            'to' => $to, // Pass the festival object
+        ]);
+    }
+
+
+
+
 
 }
