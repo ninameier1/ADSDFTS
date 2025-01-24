@@ -47,10 +47,22 @@ Route::resource('bustickets', BusTicketController::class);
 
 
 // Homepage
-Route::get('/', function ()
-    {
-        return view('welcome');
-    })->name('welcome');
+//Route::get('/', function ()
+//    {
+//        return view('welcome');
+//    })->name('welcome');
+
+// Homepage
+Route::get('/', [FestivalController::class, 'welcome'])->name('welcome');
+
+
+Route::get('/trip-planner', [FestivalController::class, 'tripPlanner'])->name('trip-planner');
+
+// Routes that only need to display a view
+Route::view('/faq', 'service/faq')->name('faq');
+Route::view('/privacy-policy', 'service/privacy-policy')->name('privacy-policy');
+Route::view('/terms-of-service', 'service/terms-of-service')->name('terms-of-service');
+
 
 
 // Dashboard route (requires authentication)
@@ -66,21 +78,6 @@ Route::middleware('auth')->group(function ()
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-
-Route::get('/faq', function ()
-    {
-        return view('service/faq');
-    })->name('faq');
-
-Route::get('/privacy-policy', function ()
-    {
-        return view('service/privacy-policy');
-    })->name('privacy-policy');
-
-Route::get('/terms-of-service', function ()
-    {
-        return view('service/terms-of-service');
-    })->name('terms-of-service');
 
 // Auth routes
 require __DIR__.'/auth.php';

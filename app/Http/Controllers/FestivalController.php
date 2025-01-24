@@ -81,4 +81,17 @@ class FestivalController extends Controller
     {
         //
     }
+
+    public function welcome()
+    {
+        $festivals = Festival::all(); // Fetch all festivals
+        return view('welcome', compact('festivals'));
+    }
+
+    public function tripPlanner()
+    {
+        $festivals = Festival::all(); // Fetch all festivals
+        return view('trip-planner', compact('festivals'));
+    }
+
 }

@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="bg-primary dark:bg-dark  top-0 sticky">
+<nav x-data="{ open: false }" class="bg-primary dark:bg-dark top-0 sticky z-50">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
@@ -12,15 +12,17 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('trip-planner')" :active="request()->routeIs('bustickets')">
+                        {{ __('Plan Your Trip') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('festivals.index')" :active="request()->routeIs('festivals')">
                         {{ __('Festivals') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('bustickets.create')" :active="request()->routeIs('bustickets')">
-                        {{ __('Book Bustickets') }}
-                    </x-nav-link>
-                </div>
+
                 @auth
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('bustickets.index')" :active="request()->routeIs('bustickets')">
@@ -28,6 +30,7 @@
                         </x-nav-link>
                     </div>
                 @endauth
+
                 <button id="darkModeToggle" class="bg-neutral dark:bg-darkneutral p-2 rounded">
                     Toggle Dark Mode
                 </button>
@@ -53,6 +56,13 @@
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
+
+                            <!-- Admin Panel (visible only for admins) -->
+                            @if(Auth::user()->role === 'admin')
+                                <x-dropdown-link :href="route('admin.dashboard')">
+                                    {{ __('Admin Panel') }}
+                                </x-dropdown-link>
+                            @endif
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">

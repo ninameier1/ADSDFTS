@@ -1,56 +1,72 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="relative">
-        <img src="{{ asset('images/festibus.jpg') }}" alt="Festival Bus" class="w-full h-screen object-cover">
+    <!-- Hero Section -->
+    <div class="relative bg-cover bg-center h-screen" style="background-image: url('{{ asset('images/festibus.jpg') }}');">
+        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">We Bring You to Your Festival</h1>
+            <a href="{{ route('trip-planner') }}" class="bg-primary text-white px-6 py-3 text-lg font-medium rounded-lg hover:bg-secondary transition">
+                Plan Your Trip Now
+            </a>
+        </div>
+    </div>
 
-        <!-- Floating Trip Planner -->
-        <div class="absolute inset-0 flex items-center justify-center">
-            <div class="bg-white dark:bg-neutral-800 shadow-lg rounded-lg p-6 w-full max-w-4xl">
-                <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-4 text-start">Plan Your Trip</h2>
-                <form action="{{ route('bustickets.create') }}" method="GET" class="flex items-center space-x-4">
+    <!-- Festival Section -->
+    <div class="py-16 bg-gray-100">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Our Featured Festivals</h2>
 
-                    <!-- From Dropdown -->
-                    <div class="flex-1">
-{{--                        <label for="from" class="block text-sm font-medium text-gray-600 dark:text-gray-300">From</label>--}}
-                        <select id="from" name="from" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
-                            <option value="" disabled selected>Select Starting Point</option>
-                            <option value="Almere">Almere</option>
-                            <option value="Amsterdam">Amsterdam</option>
-                            <option value="Utrecht">Utrecht</option>
-                        </select>
-                    </div>
+            <!-- Two Rows of Festivals -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- First Row -->
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <img src="{{ asset('images/tomorrowland.jpg') }}" alt="Tomorrowland" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Tomorrowland</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <img src="{{ asset('images/pinkpop.jpg') }}" alt="Pinkpop" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Pinkpop</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <img src="{{ asset('images/lowlands.jpg') }}" alt="Lowlands" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Lowlands</h3>
+                </div>
 
-                    <!-- Image between From and To -->
-                    <div class="flex-none">
-                        <img src="{{ asset('images/route.png') }}" alt="Route Image" class="w-12 h-12 mx-4">
-                    </div>
-
-                    <!-- To Dropdown -->
-                    <div class="flex-1">
-{{--                        <label for="to" class="block text-sm font-medium text-gray-600 dark:text-gray-300">To</label>--}}
-                        <select id="to" name="to" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-neutral-700 dark:bg-neutral-900 dark:text-gray-300 focus:border-blue-500 focus:ring-blue-500" required>
-                            <option value="" disabled selected>Select Destination</option>
-                            <option value="Tomorrowland">Tomorrowland</option>
-                            <option value="Pinkpop">Pinkpop</option>
-                            <option value="Lowlands">Lowlands</option>
-                            {{-- @foreach ($festivals as $festival) --}}
-                            {{--     <option value="{{ $festival->name }}"></option> --}}
-                            {{-- @endforeach --}}
-                        </select>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="flex-none">
-{{--                        <label for="to" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Submit</label>--}}
-                        <button type="submit" class="py-2 px-4 w-auto h-auto bg-primary text-white font-medium rounded-md hover:bg-secondary dark:bg-secondary dark:hover:bg-darktext focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                            Search
-                        </button>
-                    </div>
-                </form>
+                <!-- Second Row -->
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <img src="{{ asset('images/rockwerchter.jpg') }}" alt="Rock Werchter" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Rock Werchter</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <img src="{{ asset('images/mysteryland.jpg') }}" alt="Mysteryland" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Mysteryland</h3>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6 text-center">
+                    <img src="{{ asset('images/defqon.jpg') }}" alt="Defqon.1" class="w-full h-40 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">Defqon.1</h3>
+                </div>
             </div>
         </div>
+    </div>
 
+    <!-- Info and Service Section -->
+    <div class="py-16 bg-neutral-200">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Info Section -->
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Info</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Discover everything you need to know about our services, from how to book your tickets to our policies for a smooth and enjoyable trip.
+                </p>
+            </div>
 
-
+            <!-- Service Section -->
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Service</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    We pride ourselves on providing top-notch customer service. Our team is here to ensure your journey to the festival is seamless and enjoyable.
+                </p>
+            </div>
+        </div>
+    </div>
 @endsection

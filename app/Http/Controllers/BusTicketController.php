@@ -29,9 +29,10 @@ class BusTicketController extends Controller
     {
         // Fetch all festivals
         $festivals = Festival::all();
+        $user = auth()->user(); // Get the authenticated user
 
         // Return the 'bustickets.create' view, passing the festivals, users, and buses data
-        return view('bustickets.create', compact('festivals'));
+        return view('bustickets.create', compact('festivals', 'user'));
     }
 
     // Store a new busticket (customer action)

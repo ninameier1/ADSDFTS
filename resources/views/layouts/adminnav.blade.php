@@ -55,6 +55,13 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        <!-- Admin Panel (visible only for admins) -->
+                        @if(Auth::user()->role === 'admin')
+                            <x-dropdown-link :href="route('admin.dashboard')">
+                                {{ __('Admin Panel') }}
+                            </x-dropdown-link>
+                        @endif
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
