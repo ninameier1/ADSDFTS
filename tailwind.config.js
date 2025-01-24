@@ -23,7 +23,7 @@ export default
                 },
                 colors:
                 {
-                    primary: '#9a3412', // Primary color
+                    primary: '#500724', // Primary color
                     secondary: '#0284c7', // Secondary color
                     neutral: '#e2e8f0', // Neutral background
                     dark: '#0f172a', // Dark mode

@@ -13,6 +13,7 @@ class Festival extends Model
     protected $fillable = [
         'name',
         'location',
+        'image',
         'date',
         'description',
         'genre',

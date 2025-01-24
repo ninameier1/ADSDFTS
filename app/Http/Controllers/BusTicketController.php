@@ -77,7 +77,8 @@ class BusTicketController extends Controller
 
         // Check if there are enough seats available on the bus
         $availableSeats = 35 - $bus->bustickets->count();
-        if ($validatedData['quantity'] > $availableSeats) {
+        if ($validatedData['quantity'] > $availableSeats)
+        {
             return redirect()->back()->with('error', 'Not enough seats available on this bus.');
         }
 

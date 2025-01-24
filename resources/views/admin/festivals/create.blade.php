@@ -14,7 +14,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.festivals.store') }}" method="POST">
+        <form action="{{ route('admin.festivals.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -41,6 +41,11 @@
                 <label for="genre" class="form-label">Genre</label>
                 <input type="text" name="genre" id="genre" class="form-control" value="{{ old('genre') }}">
                 <small class="form-text text-muted">Optional: Specify the genre of the festival (e.g., Rock, Jazz).</small>
+            </div>
+
+            <div>
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*">
             </div>
 
             <button type="submit" class="btn btn-primary">Create Festival</button>

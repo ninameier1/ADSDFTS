@@ -39,6 +39,18 @@ class BusTicketObserver
                 ]);
             }
         }
+        // Points System Logic
+        $user = $busTicket->user;
+
+        if ($user)
+        {
+            // Define points per ticket
+            $pointsPerTicket = 100;
+
+            // Add points to the user's account
+            $user->points += $pointsPerTicket;
+            $user->save();
+        }
     }
 
 

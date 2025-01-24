@@ -11,7 +11,7 @@
         <p><strong>Description:</strong> {{ $festival->description }}</p>
         <p><strong>Genre:</strong> {{ $festival->genre }}</p>
 
-        <a href="{{ route('bustickets.create') }}" class="btn btn-primary">
+        <a href="{{ route('trip-planner') }}" class="btn btn-primary">
             Book a busticket
         </a>
 

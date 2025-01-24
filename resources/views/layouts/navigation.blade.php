@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('trip-planner')" :active="request()->routeIs('bustickets')">
-                        {{ __('Plan Your Trip') }}
+                        {{ __('Trip Planner') }}
                     </x-nav-link>
                 </div>
 
@@ -35,6 +35,17 @@
                     Toggle Dark Mode
                 </button>
             </div>
+
+            <!-- Points Display -->
+            <div class="hidden sm:flex sm:items-center sm:me-4">
+                @auth
+                    <div class="bg-neutral dark:bg-darkneutral px-2 py-1 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200">
+                        Points: <span class="font-bold text-secondary dark:text-secondary-light">{{ Auth::user()->points }}</span>
+                    </div>
+                @endauth
+            </div>
+
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

@@ -5,14 +5,13 @@ $header = 'Trip Planner'
 @endphp
 
 @section('content')
+
 <!-- Floating Trip Planner -->
-<div class="absolute inset-0 flex items-center justify-center">
+<div class="min-h-screen flex items-center justify-center flex-col">
+    <h1 class="text-4xl md:text-6xl font-bold text-secondary mb-6">
+        Plan Your Trip
+    </h1>
     <div class="bg-white dark:bg-neutral-800 shadow-lg rounded-lg p-6 w-full max-w-4xl">
-
-        <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200 mb-4 text-start">
-            Plan Your Trip
-        </h2>
-
         <form action="{{ route('bustickets.create') }}" method="GET" class="flex items-center space-x-4">
             <!-- From Dropdown -->
             <div class="flex-1">
@@ -55,7 +54,29 @@ $header = 'Trip Planner'
                     Book Your Trip
                 </x-primary-button>
             </div>
-
         </form>
     </div>
+
+    <!-- Info and Service Section -->
+    <div class="py-16 bg-neutral-200">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- Info Section -->
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Cities We Travel From</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    <x-dummy-content type="lorem" />
+                </p>
+            </div>
+
+            <!-- Service Section -->
+            <div class="bg-white shadow-lg rounded-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Services On The Bus</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    <x-dummy-content type="lorem" />
+                </p>
+            </div>
+        </div>
+    </div>
+
 @endsection

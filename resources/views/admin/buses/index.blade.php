@@ -26,6 +26,7 @@
                         <th>Festival</th>
                         <th>Starting point</th>
                         <th>Tickets Booked</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                     <td>{{ $bus->festival->name ?? 'N/A' }}</td>
                     <td>{{ $bus->starting_point }}</td>
                     <td>{{ $bus->bustickets_count }}</td>
+                    <td>{{ $bus->status }}</td>
                     <td>
                         <a href="{{ route('admin.buses.show', $bus) }}">
                             <x-primary-button>

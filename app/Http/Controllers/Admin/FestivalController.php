@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Festival;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class FestivalController extends Controller
 {
@@ -49,7 +51,13 @@ class FestivalController extends Controller
             'location' => 'required|string', // Festival location must be a string
             'description' => 'required|string', // Description must be provided
             'genre' => 'nullable|string', // Genre is optional
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add an image
         ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public'); // Save to storage/app/public/images
+            $validatedData['image'] = $imagePath;
+        }
 
         // Create the festival in the database using the validated data
         Festival::create($validatedData);
@@ -86,7 +94,21 @@ class FestivalController extends Controller
             'location' => 'required|string', // Festival location must be a string
             'description' => 'required|string', // Description must be provided
             'genre' => 'nullable|string', // Genre is optional
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Update the image too
         ]);
+
+        if ($request->hasFile('image'))
+        {
+            // Delete the old image if it exists
+            if ($festival->image)
+            {
+                Storage::disk('public')->delete($festival->image);
+            }
+
+            // Store the new image
+            $imagePath = $request->file('image')->store('images', 'public');
+            $validatedData['image'] = $imagePath;
+        }
 
         // Update the festival using the validated data
         $festival->update($validatedData);
