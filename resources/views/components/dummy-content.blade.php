@@ -1,4 +1,4 @@
-<div class="p-4 bg-gray-100 dark:bg-darkneutral text-gray-700 dark:text-darktext">
+<div class="text-black dark:text-darktext">
     @if ($type === 'lorem')
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque urna at metus iaculis, vel egestas risus volutpat.</p>
         <p>Curabitur tincidunt erat eu diam sodales, nec fermentum urna iaculis. Integer ut augue id arcu placerat ultricies a eget nisi.</p>

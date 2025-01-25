@@ -36,31 +36,29 @@
                 </button>
             </div>
 
-            <!-- Points Display -->
-            <div class="hidden sm:flex sm:items-center sm:me-4">
-                @auth
-                    <div class="bg-neutral dark:bg-darkneutral px-2 py-1 rounded-md text-sm font-medium text-gray-800 dark:text-gray-200">
-                        Points: <span class="font-bold text-secondary dark:text-secondary-light">{{ Auth::user()->points }}</span>
-                    </div>
-                @endauth
-            </div>
-
-
-
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Points Display -->
+                <div class="hidden sm:flex sm:items-center sm:me-4">
+                    @auth
+                        <div class="bg-secondary dark:bg-darkneutral px-3 py-2 rounded-md text-sm font-medium text-white dark:text-secondary">
+                            Points: <span class="font-bold text-white dark:text-secondary">{{ Auth::user()->points }}</span>
+                        </div>
+                    @endauth
+                </div>
+
                 @auth
                     <!-- Dropdown Menu (only for authenticated users) -->
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-neutral dark:bg-darkneutral hover:text-secondary dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            <x-secondary-button>
                                 <div>{{ Auth::user()->first_name }}</div>
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                            </button>
+                            </x-secondary-button>
                         </x-slot>
 
                         <x-slot name="content">
@@ -88,15 +86,18 @@
                     </x-dropdown>
                 @else
                     <!-- Login Button (only for guests) -->
-                    <a href="{{ route('login') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-neutral dark:bg-darkneutral hover:text-secondary dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
-                        Login
+                    <a href="{{ route('login') }}">
+                        <x-secondary-button>
+                            Login
+                        </x-secondary-button>
                     </a>
-                    <a href="{{ route('register') }}" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-neutral dark:bg-darkneutral hover:text-secondary dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150 ms-2">
-                        Register
+                    <a href="{{ route('register') }}">
+                        <x-secondary-button>
+                            Register
+                        </x-secondary-button>
                     </a>
                 @endauth
             </div>
-
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">

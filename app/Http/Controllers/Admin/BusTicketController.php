@@ -16,28 +16,33 @@ class BusTicketController extends Controller
         // Get the search query from the request
         $search = $request->get('search');
 
-        // Fetch bustickets with eager loading, including the user (customer), bus, and festival relationships
+        // Fetch bus tickets with eager loading, including the user (customer), bus, and festival relationships
         $bustickets = BusTicket::with(['bus', 'festival', 'user']) // Eager load user relationship
         ->when($search, function ($query, $search)
         {
-            // Filter by customer name, bus number, or festival name
-            return $query->whereHas('user', function ($query) use ($search)
+            // Filter by exact customer name, bus number, or festival name
+            $query->where(function ($query) use ($search)
             {
-                $query->where('first_name', 'like', "%{$search}%"); // Search by customer name
-                $query->where('last_name', 'like', "%{$search}%");
-            })
-                ->orWhereHas('bus', function ($query) use ($search)
+                $query->whereHas('user', function ($query) use ($search)
                 {
-                    $query->where('bus_number', 'like', "%{$search}%"); // Search by bus number
+                    $query->where('first_name', '=', $search) // Exact match on first name
+                    ->orWhere('last_name', '=', $search); // Exact match on last name
                 })
-                ->orWhereHas('festival', function ($query) use ($search)
-                {
-                    $query->where('name', 'like', "%{$search}%"); // Search by festival name
-                });
+                    ->orWhereHas('bus', function ($query) use ($search)
+                    {
+                        $query->where('bus_number', '=', $search); // Exact match on bus number
+                    })
+                    ->orWhereHas('festival', function ($query) use ($search)
+                    {
+                        $query->where('name', '=', $search); // Exact match on festival name
+                    })
+                    ->orWhere('id', '=', $search); // Exact match on ticket ID
+            });
         })
+            ->orderBy('id', 'asc') // Sort by ID in ascending order
             ->get();
 
-        // Return the view with the bustickets and the search query
+        // Return the view with the bus tickets and the search query
         return view('admin.bustickets.index', compact('bustickets', 'search'));
     }
 

@@ -10,14 +10,27 @@ use Illuminate\Http\Request;
 class BusController extends Controller
 {
     // Display a list of buses with ticket counts
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch all buses along with the count of tickets associated with each bus
-        $buses = Bus::withCount('bustickets')->get();
+        // Retrieve the search query from the request
+        $search = $request->input('search', '');
 
-        // Return the 'buses.index' view, passing the buses data to the view
-        return view('admin.buses.index', compact('buses'));
+        // Fetch buses with search functionality
+        $buses = Bus::withCount('bustickets')
+            ->when($search, function ($query, $search) {
+                // Filter buses by bus_number, starting_point, or festival name
+                $query->where('bus_number', 'like', "%{$search}%")
+                    ->orWhere('starting_point', 'like', "%{$search}%")
+                    ->orWhereHas('festival', function ($query) use ($search) {
+                        $query->where('name', 'like', "%{$search}%");
+                    });
+            })
+            ->get();
+
+        // Return the 'buses.index' view, passing the buses data and search query to the view
+        return view('admin.buses.index', compact('buses', 'search'));
     }
+
 
     // Show the form to create a new bus (manual creation by admin)
     public function create()

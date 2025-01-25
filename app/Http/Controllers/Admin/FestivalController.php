@@ -13,12 +13,21 @@ class FestivalController extends Controller
     // Display a list of festivals with bus and ticket counts
     public function index(Request $request)
     {
+        // Get search term from the request
+        $search = $request->get('search', '');
         // Determine the sorting column and direction from the request
         $sortColumn = $request->get('sort', 'date'); // Default sort by 'date'
         $sortDirection = $request->get('direction', 'asc'); // Default direction is 'asc'
 
         // Validate that the sorting column is allowed
-        $allowedColumns = ['name', 'date', 'location', 'genre', 'buses_count', 'bustickets_count'];
+        $allowedColumns = [
+            'name',
+            'date',
+            'location',
+            'genre',
+            'buses_count',
+            'bustickets_count'
+        ];
         if (!in_array($sortColumn, $allowedColumns))
         {
             $sortColumn = 'date'; // Fallback to default column
@@ -26,12 +35,20 @@ class FestivalController extends Controller
 
         // Fetch festivals with bus and ticket counts, sorted by the requested column and direction
         $festivals = Festival::withCount(['buses', 'bustickets'])
+            ->when($search, function ($query, $search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('location', 'like', '%' . $search . '%');
+                });
+            })
             ->orderBy($sortColumn, $sortDirection)
             ->get();
 
-        // Return the 'festivals.index' view, passing the festivals data and sorting info
-        return view('admin.festivals.index', compact('festivals', 'sortColumn', 'sortDirection'));
+        // Return the 'festivals.index' view, passing the festivals data, sorting info, and search term
+        return view('admin.festivals.index', compact('festivals', 'sortColumn', 'sortDirection', 'search'));
     }
+
+
 
 
     // Show the form to create a new festival (manual creation by admin)

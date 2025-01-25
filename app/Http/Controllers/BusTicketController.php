@@ -20,8 +20,13 @@ class BusTicketController extends Controller
             ->where('user_id', auth()->id()) // Filter by the logged-in user
             ->get();
 
-        return view('bustickets.index', compact('bustickets', 'search'));
+        // Group the tickets by festival
+        $busticketsGrouped = $bustickets->groupBy(fn($ticket) => $ticket->festival ? $ticket->festival->name : 'No Festival');
+
+        // Return the view with the grouped tickets
+        return view('bustickets.index', compact('busticketsGrouped', 'search'));
     }
+
 
 
     // Show the form for booking a busticket (customer action)

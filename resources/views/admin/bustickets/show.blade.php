@@ -1,34 +1,58 @@
-@extends('layouts.adminapp')
+@extends('layouts.app')
+
+@php
+    $header = 'Details for Ticket  #' . $busticket->id;
+@endphp
 
 @section('content')
-    <div class="container">
-        <h1>Ticket Details</h1>
+    <div class="container mx-auto px-4 py-8">
 
-        <div class="card">
-            <div class="card-header">
-                Ticket #{{ $busticket->id }}
+        <div class="max-w-4xl mx-auto bg-white dark:bg-secondary shadow-lg rounded-lg overflow-hidden mt-12">
+            <div class="bg-primary dark:bg-dark text-white text-lg font-bold p-4">
+                Busticket #{{ $busticket->id }}
             </div>
-            <div class="card-body">
-                <p><strong>Festival:</strong> {{ $busticket->festival ? $busticket->festival->name : 'No Festival' }}</p>
-                <p><strong>Starting Point:</strong> {{ $busticket->bus->starting_point ?? 'N/A' }}</p>
-                <p><strong>Customer First Name:</strong> {{ $busticket->user->first_name }}</p>
-                <p><strong>Customer Last Name:</strong> {{ $busticket->user->last_name }}</p>
-                <p><strong>Bus Number:</strong> {{ $busticket->bus->bus_number }}</p>
-                <p><strong>Seat Number:</strong> {{ $busticket->seat_number ?? 'N/A' }}</p>
-                <p><strong>Booking Date:</strong> {{ $busticket->created_at->format('Y-m-d H:i') }}</p>
+            <div class="p-6 space-y-4">
+                <p><strong class="font-medium text-gray-700">Festival:</strong>
+                    <span class="text-gray-600">{{ $busticket->festival ? $busticket->festival->name : 'No Festival' }}</span>
+                </p>
+                <p><strong class="font-medium text-gray-700">Starting Point:</strong>
+                    <span class="text-gray-600">{{ $busticket->bus->starting_point ?? 'N/A' }}</span>
+                </p>
+                <p><strong class="font-medium text-gray-700">Customer First Name:</strong>
+                    <span class="text-gray-600">{{ $busticket->user->first_name }}</span>
+                </p>
+                <p><strong class="font-medium text-gray-700">Customer Last Name:</strong>
+                    <span class="text-gray-600">{{ $busticket->user->last_name }}</span>
+                </p>
+                <p><strong class="font-medium text-gray-700">Bus Number:</strong>
+                    <span class="text-gray-600">{{ $busticket->bus->bus_number }}</span>
+                </p>
+                <p><strong class="font-medium text-gray-700">Seat Number:</strong>
+                    <span class="text-gray-600">{{ $busticket->seat_number ?? 'N/A' }}</span>
+                </p>
+                <p><strong class="font-medium text-gray-700">Booking Date:</strong>
+                    <span class="text-gray-600">{{ $busticket->created_at->format('Y-m-d H:i') }}</span>
+                </p>
             </div>
         </div>
 
-        <!-- Edit and Delete Buttons -->
-        <div class="mt-3">
+        <!-- Delete Button -->
+        <div class="mt-6 text-center">
             <form action="{{ route('admin.bustickets.destroy', $busticket) }}" method="POST" style="display: inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</button>
+                <x-primary-button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this ticket?')">Delete</x-primary-button>
             </form>
         </div>
 
         <!-- Back to Tickets Button -->
-        <a href="{{ route('admin.bustickets.index') }}" class="btn btn-primary mt-3">Back to Bustickets</a>
+        <div class="mt-6 text-center">
+            <a href="{{ route('admin.bustickets.index') }}">
+                <x-primary-button>
+                    Back to Bustickets
+                </x-primary-button>
+            </a>
+        </div>
     </div>
 @endsection
+
