@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- Festival Section -->
-    <div class="py-8 bg-gray-100">
+    <div class="py-8">
         <div class="container mx-auto">
 
             <!-- Sorting Links -->
@@ -31,20 +31,15 @@
                 </a>
             </div>
 
-            <!-- Festival Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach ($festivals as $festival)
-                    <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <h3 class="text-xl font-semibold text-darkneutral">{{ $festival->name }}</h3>
-                        <img src="{{ asset('storage/' . $festival->image) }}" alt="{{ $festival->name }}" class="w-full h-40 object-cover rounded-md mb-4">
-                        <p class="text-gray-600">{{ $festival->date->format('Y-m-d') }}</p>
-                        <p class="text-gray-600">{{ $festival->location }}</p>
-                        <a href="{{ route('festivals.show', $festival) }}">
-                            <x-primary-button>
-                                View Details
-                            </x-primary-button>
-                        </a>
-                    </div>
+                    <x-festival-card
+                        :name="$festival->name"
+                        :image="$festival->image"
+                        :date="$festival->date->format('Y-m-d')"
+                        :location="$festival->location"
+                        :detailsRoute="route('festivals.show', $festival)"
+                    />
                 @endforeach
             </div>
 

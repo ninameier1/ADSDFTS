@@ -5,6 +5,13 @@ $header = 'My Booked Tickets'
 @endphp
 
 @section('content')
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="container">
         @if($bustickets->isEmpty())
             <p>No tickets found.</p>

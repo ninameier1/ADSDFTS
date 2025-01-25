@@ -60,7 +60,7 @@
 
         </form>
 
-        <a href="{{ route('admin.festivals.show', $festival->id) }}" class="btn btn-primary">
+        <a href="{{ route('admin.festivals.show', $festival->id) }}">
             <x-primary-button>
                 Back to Festival
             </x-primary-button>
