@@ -1,4 +1,4 @@
-<div class="text-black dark:text-darktext">
+<div {{ $attributes->merge(['class' => 'default-classes']) }} class="text-black dark:text-darktext">
     @if ($type === 'lorem')
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque urna at metus iaculis, vel egestas risus volutpat.</p>
         <p>Curabitur tincidunt erat eu diam sodales, nec fermentum urna iaculis. Integer ut augue id arcu placerat ultricies a eget nisi.</p>
@@ -77,7 +77,10 @@
 
         <p><strong>Q: Can I trust your service?</strong></p>
         <p>A: Yes, we’re never gonna tell a lie and hurt you. Our service is 100% trustworthy and reliable!</p>
-    @elseif ($type === 'rickroll')
+    @elseif ($type === 'about')
+        <p><strong>We Are Festibus!</strong></p>
+        <p>Your Festival Starts With Us.</p>
+        <br>
         <img src="{{ asset('images/rickroll.jpg') }}" alt="Rickroll" />
     @endif
 </div>

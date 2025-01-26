@@ -1,4 +1,4 @@
-<footer class="bg-primary dark:bg-dark text-neutral dark:text-secondary  py-6">
+<footer class="bg-primary dark:bg-dark text-neutral dark:text-secondary py-6">
     <div class="max-w-7xl mx-auto text-center">
 
         <!-- Social Media Links -->
@@ -19,9 +19,10 @@
 
         <!-- Footer Links -->
         <div class="mb-4">
-            <a href="{{ route('faq') }}" class="text-sm hover:text-secondary dark:hover:text-neutral">FAQ</a> |
+            <a href="{{ route('about') }}" class="text-sm hover:text-secondary dark:hover:text-neutral">About Us</a> |
             <a href="{{ route('privacy-policy') }}" class="text-sm hover:text-secondary dark:hover:text-neutral">Privacy Policy</a> |
-            <a href="{{ route('terms-of-service') }}" class="text-sm hover:text-secondary dark:hover:text-neutral">Terms of Service</a>
+            <a href="{{ route('terms-of-service') }}" class="text-sm hover:text-secondary dark:hover:text-neutral">Terms of Service</a> |
+            <a href="{{ route('faq') }}" class="text-sm hover:text-secondary dark:hover:text-neutral">FAQ</a>
         </div>
 
         <!-- Address and Contact -->

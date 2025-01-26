@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <!-- Meta Tags -->
         <meta charset="utf-8">
+        <meta name="author" content="Nina Meier">
+        <meta name="description" content="Festibus">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-{{--        <link href="{{ mix('css/app.css') }}" rel="stylesheet">--}}
 
-        <title>{{ config('app.name', 'Festibus') }}</title>
+        <!-- Title -->
+        <title>{{ config('app.name') }}</title>
+
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/png">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

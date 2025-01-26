@@ -47,23 +47,16 @@ Route::resource('bustickets', BusTicketController::class);
 
 
 // Homepage
-//Route::get('/', function ()
-//    {
-//        return view('welcome');
-//    })->name('welcome');
-
-// Homepage
 Route::get('/', [FestivalController::class, 'welcome'])->name('welcome');
 
 
 Route::get('/trip-planner', [FestivalController::class, 'tripPlanner'])->name('trip-planner');
 
 // Routes that only need to display a view
+Route::view('/about', 'service/about')->name('about');
 Route::view('/faq', 'service/faq')->name('faq');
 Route::view('/privacy-policy', 'service/privacy-policy')->name('privacy-policy');
 Route::view('/terms-of-service', 'service/terms-of-service')->name('terms-of-service');
-
-
 
 // Dashboard route (requires authentication)
 Route::get('/dashboard', function ()
