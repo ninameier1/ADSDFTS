@@ -8,8 +8,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BusTicketController;
 use App\Http\Controllers\BusController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Http\Middleware\isAdmin;
-
 
 Route::get('/admin', function ()
     {
@@ -74,3 +74,10 @@ Route::middleware('auth')->group(function ()
 
 // Auth routes
 require __DIR__.'/auth.php';
+
+// Dark Mode
+Route::post('/toggle-dark-mode', function (Request $request)
+{
+    $request->session()->put('dark_mode', $request->dark_mode);
+    return response()->json(['status' => 'success']);
+});

@@ -26,9 +26,6 @@
                         {{ __('Bustickets') }}
                     </x-nav-link>
                 </div>
-                <button id="darkModeToggle" class="bg-neutral dark:bg-darkneutral p-2 rounded">
-                    Toggle Dark Mode
-                </button>
             </div>
 
             <!-- Settings Dropdown -->

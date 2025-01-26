@@ -30,10 +30,6 @@
                         </x-nav-link>
                     </div>
                 @endauth
-
-                <button id="darkModeToggle" class="bg-neutral dark:bg-darkneutral p-2 rounded">
-                    Toggle Dark Mode
-                </button>
             </div>
 
             <!-- Settings Dropdown -->

@@ -8,23 +8,29 @@ Alpine.start();
 
 
 // Dark mode
+// Dark mode toggle
 const darkModeToggle = document.getElementById('darkModeToggle');
 
-darkModeToggle.addEventListener('click', function () {
-    // Toggle dark mode class on the html element
-    document.documentElement.classList.toggle('dark');
+// Check localStorage for the dark mode setting and apply it
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.documentElement.classList.add('dark');
+    darkModeToggle.checked = true; // Ensure the checkbox is checked
+} else {
+    document.documentElement.classList.remove('dark');
+    darkModeToggle.checked = false; // Ensure the checkbox is unchecked
+}
 
-    // Save the dark mode preference in the session
-    const isDarkMode = document.documentElement.classList.contains('dark');
-    fetch('/toggle-dark-mode', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-        },
-        body: JSON.stringify({dark_mode: isDarkMode})
-    });
+// Listen for changes on the toggle
+darkModeToggle.addEventListener('change', function () {
+    if (this.checked) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('darkMode', 'enabled'); // Save preference
+    } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('darkMode', 'disabled'); // Save preference
+    }
 });
+
 
 // Carousel for the front page!!
 document.addEventListener('DOMContentLoaded', function () {

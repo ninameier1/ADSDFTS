@@ -4,8 +4,8 @@
     <!-- Hero Section -->
     <div class="relative bg-cover bg-center h-screen" style="background-image: url('{{ asset('images/festibus.jpg') }}');">
         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-neutral mb-4">Your Festival Starts With Us!</h1>
-            <h2 class="text-2xl md:text-2xl text-neutral mb-2">Our travel experience gets you in the festival mood</h2>
+            <h1 class="text-4xl md:text-6xl font-bold text-neutral mb-4">We Are Festibus</h1>
+            <h2 class="text-2xl md:text-2xl text-neutral mb-2">Your Festival Starts With Us!</h2>
             <a href="{{ route('trip-planner') }}">
                 <x-primary-button>
                     Plan Your Trip Now
