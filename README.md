@@ -1,66 +1,119 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# README
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## System Requirements
+To successfully run the Festibus website, the following system requirements apply:
 
-## About Laravel
+### Platform Support
+The website is designed to function well on desktops, tablets, and mobile devices.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Hardware
+- A computer, tablet, or mobile phone with at least 4 GB RAM and a modern processor.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Software
+- An operating system that supports PHP and MySQL, such as macOS, Windows, or Linux.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Required Software and Tools
+- **PHP**: Minimum version 8.2
+- **Composer**: For managing PHP dependencies
+- **Laravel**: Automatically downloaded via Composer
+- **MySQL**: For the database
 
-## Learning Laravel
+### Network Connection
+- A stable internet connection is required for external resources and updates, but not necessary for local use.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Browser Requirements
+The website supports modern and up-to-date browsers such as Google Chrome, Mozilla Firefox, Microsoft Edge, and Apple Safari. Older browsers are not fully supported as HTML5 and JavaScript ES6 are used.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Server Environment
+For local development, a local server that supports PHP and MySQL is required.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Installation Steps
+Follow these steps to install the project locally:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Download the Project Files
+- **Via ZIP**: Download the zip file of the project and extract it.
+- **Via GitHub**: Clone the repository to your local machine:
+  ```bash
+  git clone https://github.com/ninameier1/ADSDFTS.git
+  cd ADSDFTS
+  ```
 
-### Premium Partners
+### 2. Install Dependencies
+Laravel uses Composer to manage PHP packages. Install the required dependencies by running:
+```bash
+composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### 3. Open the `.env` File
+The `.env` file should already be included in the downloaded project. Open it in a text editor and adjust the database settings if needed, such as a different port number or database password.
 
-## Contributing
+### 4. Generate the Application Key
+Run the following command to generate Laravel’s application key:
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 5. Create the Database
+Before running migrations, ensure the database exists. This can be done manually using MySQL CLI or phpMyAdmin:
+```bash
+mysql -u root -p
+CREATE DATABASE fts;
+EXIT;
+```
 
-## Code of Conduct
+### 6. Run Migrations and Seeders
+Run the migrations to create the tables in the database:
+```bash
+php artisan migrate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Run the seeders to populate the tables with dummy data:
+```bash
+php artisan db:seed
+```
 
-## Security Vulnerabilities
+### 7. Install Node.js Dependencies
+To ensure Tailwind CSS and other frontend assets work correctly, install Node.js dependencies:
+```bash
+npm install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 8. Start the Development Servers
+Start the Laravel development server:
+```bash
+php artisan serve
+```
 
-## License
+Start the Vite development server for Tailwind CSS and frontend assets:
+```bash
+npm run dev
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Make sure to keep both servers running during development.
+
+---
+
+## Running the Application
+After installation, open your browser and navigate to:
+[http://localhost:8000](http://localhost:8000)
+
+Ensure that the local server is active and the database is properly configured.
+
+---
+
+## Troubleshooting
+- **Database Connection Errors**: Check that the correct database credentials are entered in the `.env` file.
+- **MySQL Issues**: Ensure the MySQL database is running and accessible.
+- **Tailwind Not Working**: Verify that the Vite development server is running (`npm run dev`).
+
+---
+
+## Notes for Production
+For deploying the application in a production environment, run:
+```bash
+npm run build
+```
+This will generate optimized CSS and JavaScript files for production use.
+
