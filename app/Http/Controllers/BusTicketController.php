@@ -52,7 +52,7 @@ class BusTicketController extends Controller
         $festival = Festival::findOrFail($festivalId);
 
         // Define the trip cost (1000 points per trip)
-        $tripCost = 1000; // Adjust this if needed, or calculate based on quantity if passed
+        $tripCost = 1000; //
 
         // Pass the trip details, festival, and trip cost to the view
         return view('bustickets.create', compact('from', 'festival', 'tripCost'));

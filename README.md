@@ -80,7 +80,18 @@ To ensure Tailwind CSS and other frontend assets work correctly, install Node.js
 npm install
 ```
 
-### 8. Start the Development Servers
+### 8. Create the Storage Link
+Run the following command to create a symbolic link for the storage directory, making it publicly accessible:
+```bash
+php artisan storage:link
+```
+
+### 9. Set Permissions for the Storage Directory
+```bash
+chmod -R 775 storage
+```
+
+### 10. Start the Development Servers
 Start the Laravel development server:
 ```bash
 php artisan serve
@@ -100,6 +111,13 @@ After installation, open your browser and navigate to:
 [http://localhost:8000](http://localhost:8000)
 
 Ensure that the local server is active and the database is properly configured.
+
+---
+
+## Admin credentials
+By default, after running the migrations and seeding the database, a standard admin account is created. To log in to this account, use the following credentials:
+- **E-mail**: admin@test.com
+- **Password**: admin
 
 ---
 

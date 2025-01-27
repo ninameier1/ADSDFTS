@@ -19,13 +19,21 @@ class DatabaseSeeder extends Seeder
         // Create users
         $users = \App\Models\User::factory(10)->create();
 
-        // Create a specific test admin user just for me
+        // Create a specific admin user just for me
         User::factory()->create([
             'first_name' => 'admin',
             'last_name' => 'admin',
             'email' => 'admin@test.com',
             'password' => bcrypt('admin'),
             'role' => 'admin',
+        ]);
+        // Test user for dusk
+        User::factory()->create([
+            'first_name' => 'Test',
+            'last_name' => 'User',
+            'email' => 'user@example.com',
+            'password' => bcrypt('password123'),
+            'role' => 'customer',
         ]);
 
         // Create festivals
