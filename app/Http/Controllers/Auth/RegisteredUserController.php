@@ -41,7 +41,8 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'customer',  // Set the default role to 'customer'
+            'role' => 'customer',  // Set the default role to 'customer', can't have them poke their nose where it doesn't belong
+            'points' => 0,  // Set the default points to 0, they ain't getting no freebies!
         ]);
 
         event(new Registered($user));

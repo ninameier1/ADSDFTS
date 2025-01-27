@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('password'), // Default password for all users? unsure
             'role' => 'customer', // Default role is always 'customer'
-            'points' => fake()->numberBetween(0, 1000),
+            'points' => fake()->numberBetween(0, 1000), // Fake users can have points :) I'm generous
             'remember_token' => Str::random(10),
         ];
     }

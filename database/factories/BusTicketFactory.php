@@ -19,7 +19,7 @@ class BusTicketFactory extends Factory
     public function definition(): array
     {
         return [
-            'seat_number' => fake()->unique()->numberBetween(1, 1000),
+            'seat_number' => fake()->unique()->numberBetween(1, 1000), // This gave errors if the number was too small
         ];
     }
 }

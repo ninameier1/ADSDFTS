@@ -54,7 +54,7 @@
                     Number of Tickets
                 </label>
                 <select id="quantity" name="quantity" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-darkneutral dark:border-neutral-700 dark:text-gray-300" required>
-                    @for ($i = 1; $i <= 34; $i++)
+                    @for ($i = 1; $i <= 5; $i++)
                         <option value="{{ $i }}" {{ $i == 1 ? 'selected' : '' }}>{{ $i }}</option>
                     @endfor
                 </select>

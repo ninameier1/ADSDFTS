@@ -1,7 +1,7 @@
 @extends('layouts.adminapp')
 
 @section('content')
-    <div class="flex items-center justify-center min-h-screen bg-gray-100 px-4 py-8">
+    <div class="flex items-center justify-center min-h-screen px-4 py-8">
         <div class="max-w-4xl w-full bg-white dark:bg-secondary shadow-lg rounded-lg overflow-hidden mt-12">
             <div class="bg-primary dark:bg-dark text-white text-lg font-bold p-4">
                 Create a New Festival

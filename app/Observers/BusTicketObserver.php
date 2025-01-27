@@ -17,7 +17,8 @@ class BusTicketObserver
         $bus = $busTicket->bus;
 
         // Check if the bus is a reserve bus and if it has 35 tickets sold
-        if ($bus->status === 'reserve' && $bus->bustickets->count() >= 35) {
+        if ($bus->status === 'reserve' && $bus->bustickets->count() >= 35)
+        {
             // Update the bus status to 'scheduled' once 35 tickets are sold
             $bus->status = 'scheduled';
 
@@ -40,7 +41,8 @@ class BusTicketObserver
                 ->first();
 
             // If no reserve bus exists for the starting point, create a new one
-            if (!$existingReserveBus) {
+            if (!$existingReserveBus)
+            {
                 Bus::create([
                     'bus_number' => 'Reserve-' . uniqid(), // Automatically create a unique bus number
                     'capacity' => 35, // Set the capacity to 35 seats

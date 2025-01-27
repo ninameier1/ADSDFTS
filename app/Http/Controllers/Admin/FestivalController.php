@@ -73,7 +73,7 @@ class FestivalController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public'); // Save to storage/app/public/images
-            $validatedData['image'] = $imagePath;
+            $validatedData['image'] = 'storage/' . $imagePath; // Store the full URL path with /storage
         }
 
         // Create the festival in the database using the validated data
@@ -124,7 +124,7 @@ class FestivalController extends Controller
 
             // Store the new image
             $imagePath = $request->file('image')->store('images', 'public');
-            $validatedData['image'] = $imagePath;
+            $validatedData['image'] = 'storage/' . $imagePath; // Store the full URL path with /storage
         }
 
         // Update the festival using the validated data

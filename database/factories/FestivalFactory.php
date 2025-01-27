@@ -18,6 +18,7 @@ class FestivalFactory extends Factory
 
     public function definition(): array
     {
+        // It was SO UGLY when I used the inbuilt random words generator so I made a list of words so the festivals actually have decent names
         $nouns = [
             'Banana',
             'Sock',

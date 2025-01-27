@@ -57,7 +57,7 @@
                         </label>
                         @if ($festival->image)
                             <div class="mt-2">
-                                <img src="{{ asset('storage/' . $festival->image) }}" alt="{{ $festival->name }}" class="w-40 h-40 object-cover mb-4">
+                                <img src="{{ asset($festival->image) }}" alt="{{ $festival->name }}" class="w-40 h-40 object-cover mb-4">
                                 <p class="text-sm text-gray-500">
                                     Current Image
                                 </p>

@@ -66,7 +66,7 @@
         </div>
 
         <h2 class="text-xl md:text-xl text-secondary mt-4 mb-2">
-            We provide trips from all starting points to all listed festivals. We always have buses available. Your festival starts with us!
+            We provide trips from all starting points to all listed festivals. We always have tickets available. Your festival starts with us!
         </h2>
 
         <!-- Cities and Service Section -->
