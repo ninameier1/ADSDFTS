@@ -23,12 +23,12 @@ export default
                 },
                 colors:
                 {
-                    primary: '#500724', // Primary color
-                    secondary: '#0284c7', // Secondary color
-                    neutral: '#e2e8f0', // Neutral background
-                    dark: '#0f172a', // Dark mode
-                    darkneutral: '#1e293b',
-                    darktext: '#94a3b8'
+                    primary: '#500724', // Primary colour
+                    secondary: '#0284c7', // Secondary colour
+                    neutral: '#e2e8f0', // Neutral background colour
+                    dark: '#0f172a', // Dark mode primary colour
+                    darkneutral: '#1e293b', // Dark mode neutral background colour
+                    darktext: '#94a3b8' // Dark mode text colour
                 },
             },
         },

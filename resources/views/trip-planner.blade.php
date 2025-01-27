@@ -11,6 +11,10 @@
         <h1 class="text-4xl md:text-6xl font-bold text-secondary mb-6">
             Plan Your Trip
         </h1>
+        <h2 class="text-2xl md:text-2xl text-secondary mb-4">
+            Simply select a starting point and festival destination!
+        </h2>
+
         <div class="bg-white dark:bg-dark shadow-lg rounded-lg p-6 w-full max-w-4xl">
             <form action="{{ route('bustickets.create') }}" method="GET" class="flex items-center space-x-4">
                 <!-- From Dropdown -->
@@ -60,6 +64,10 @@
                 </div>
             </form>
         </div>
+
+        <h2 class="text-xl md:text-xl text-secondary mt-4 mb-2">
+            We provide trips from all starting points to all listed festivals. We always have buses available. Your festival starts with us!
+        </h2>
 
         <!-- Cities and Service Section -->
         <div class="py-16 bg-neutral-200">
