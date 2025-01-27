@@ -75,7 +75,7 @@
             <!-- Terms and Conditions Checkbox -->
             <div class="mb-6">
                 <label class="flex items-center">
-                    <input type="checkbox" id="terms1" class="mr-2" />
+                    <input type="checkbox" id="terms1" name="terms" class="mr-2" />
                     <span class="text-sm text-gray-700 dark:text-gray-300">
                         I agree to the <a href="{{ route('terms-of-service') }}" class="text-blue-500">terms and conditions</a>.
                     </span>
