@@ -53,8 +53,13 @@
                 <label for="quantity" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     Number of Tickets
                 </label>
-                <input type="number" id="quantity" name="quantity" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-darkneutral dark:border-neutral-700 dark:text-gray-300" min="1" max="35" value="1" required>
+                <select id="quantity" name="quantity" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-darkneutral dark:border-neutral-700 dark:text-gray-300" required>
+                    @for ($i = 1; $i <= 34; $i++)
+                        <option value="{{ $i }}" {{ $i == 1 ? 'selected' : '' }}>{{ $i }}</option>
+                    @endfor
+                </select>
             </div>
+
 
             <!-- Payment Option Dropdown -->
             <div class="mb-6">

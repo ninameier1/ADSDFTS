@@ -91,7 +91,7 @@ class FestivalController extends Controller
     public function tripPlanner()
     {
         $festivals = Festival::all(); // Fetch all festivals
-        $from = 'Your Starting Point'; // Replace this with the actual starting point logic
+        $from = 'Your Starting Point';
 
         return view('trip-planner', compact('festivals', 'from'));
     }

@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Create festivals
-        $festivals = \App\Models\Festival::factory(5)->create();
+        $festivals = \App\Models\Festival::factory(6)->create();
 
         // Create buses for each festival
         foreach ($festivals as $festival)

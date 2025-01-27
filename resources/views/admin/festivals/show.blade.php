@@ -11,6 +11,9 @@
                 {{ $festival->name }}
             </div>
 
+            <img src="{{ asset($festival->image) }}" alt="{{ $festival->name }}" class="w-full h-[500px] object-cover rounded-md mb-4">
+
+
             <div class="p-6 space-y-4">
                 <p>
                     <strong class="font-medium text-gray-700">

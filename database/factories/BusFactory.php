@@ -23,7 +23,7 @@ class BusFactory extends Factory
 
         return
         [
-            'bus_number' => 'Bus-' . uniqid(), // Bus counter
+            'bus_number' => 'Scheduled-' . uniqid(), // Bus counter
             'status' => 'scheduled', // Set the default status to 'scheduled'
             'capacity' => 35, // Duh
             'starting_point' => fake()->randomElement($cities), // Randomly pick a city from the predefined list

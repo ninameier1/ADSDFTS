@@ -24,9 +24,19 @@
                 <p><strong class="font-medium text-gray-700">Customer Last Name:</strong>
                     <span class="text-gray-600">{{ $busticket->user->last_name }}</span>
                 </p>
-                <p><strong class="font-medium text-gray-700">Bus Number:</strong>
-                    <span class="text-gray-600">{{ $busticket->bus->bus_number }}</span>
+                <p>
+                    <strong class="font-medium text-gray-700">Departure time:</strong>
+                    <span class="text-gray-600">
+                        {{ $busticket->bus->departure_time ?? 'We will update you with the departure time soon!' }}
+                    </span>
                 </p>
+                <p>
+                    <strong class="font-medium text-gray-700">Arrival time:</strong>
+                    <span class="text-gray-600">
+                        {{ $busticket->bus->arrival_time ?? 'We will update you with the arrival time soon!' }}
+                    </span>
+                </p>
+
                 <p><strong class="font-medium text-gray-700">Seat Number:</strong>
                     <span class="text-gray-600">{{ $busticket->seat_number ?? 'N/A' }}</span>
                 </p>

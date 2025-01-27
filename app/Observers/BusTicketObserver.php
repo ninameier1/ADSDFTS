@@ -20,6 +20,17 @@ class BusTicketObserver
         if ($bus->status === 'reserve' && $bus->bustickets->count() >= 35) {
             // Update the bus status to 'scheduled' once 35 tickets are sold
             $bus->status = 'scheduled';
+
+            // Get the first 3 letters of the starting point and festival name
+            $startingPointShort = substr($bus->starting_point, 0, 3);  // First 3 letters of the starting point
+            $festivalShort = substr($bus->festival->name, 0, 3); // First 3 letters of the festival name
+
+            // Generate a random 2-digit number
+            $uniqueNumber = str_pad(rand(10, 99), 2, '0', STR_PAD_LEFT);  // 2-digit number
+
+            // Set the bus number (name) to reflect the starting point, festival name, and the unique number
+            $bus->bus_number = 'Scheduled-' . $startingPointShort . '_' . $festivalShort . '-' . $uniqueNumber;
+
             $bus->save();
 
             // Check if there is already a reserve bus for the same festival and starting point
